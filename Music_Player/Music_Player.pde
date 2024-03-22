@@ -2,8 +2,10 @@
 //
 void setup() {} //End setup
 //
-void draw() {}
+void draw() {} //End draw
 //
-void keypressed
+void keyPressed() {} //End Keypressed
 //
-void mousepressed
+void mousePressed() {} //End mousepressed
+//
+//End Main Program
