@@ -11,6 +11,6 @@ void keyPressed() {
 } //End Keypressed
 //
 void mousePressed() {
-} //End mousepressed
+} //End mousePressed
 //
 //End Main Program
