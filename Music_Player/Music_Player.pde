@@ -1,5 +1,6 @@
 //Global Variables
 int appWidth, appHeight;
+float backgroundX, backgroundY, backgroundWidth,backgroundHeight
 //
 void setup() {
   println("HelloWorld");//print("Hello");//print("World")
@@ -13,10 +14,16 @@ void setup() {
   //fulscreen();//displayWidth, displayHeight
   appWidth = displayWidth;
   appHeight = displayHeight;
+  //Landscape is HARDCODED
   println(appWidth, appHeight);
   //Display Geometry: Landscape, Portrait, Square
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : " Bro, Turn Your Phone" ;
   println(displayInstructions);
+  //
+  //LAYOUT DIVs
+//rect(X, Y, Width, Height);
+  rect(backgroundX, backgroundY, backgroundWidth,background Height);
+  println(backgroundX, backgroundY, backgroundWidth,background Height)
   //CONTINUE HERE: concatenation & display geometry
   //declare landscape, portrait, or square with ternary operator
 } //End setup
