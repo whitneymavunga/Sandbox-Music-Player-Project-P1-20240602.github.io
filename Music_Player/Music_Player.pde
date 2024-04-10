@@ -23,12 +23,12 @@ void setup() {
   StarTunesY = appHeight*15/100;
   StarTunesWidth = appWidth*64/100;
   StarTunesHeight = appHeight*6/16; // Fraction Example
-  playButtonX = appWidth*3.5/8;
-  playbuttonY = appHeight*8/9;
-  playButtonWidth = appWidth*1/8;
-  playButtonHeight = appHeight*1/12;
-  quitButtonX = appWidth*90/100;
-  quitButtonY = appHeight*91/100;
+  playButtonX = appWidth*3.45/8;
+  playbuttonY = appHeight*6.5/9;
+  playButtonWidth = appWidth*1.5/8;
+  playButtonHeight = appHeight*1/16;
+  quitButtonX = appWidth*88/100;
+  quitButtonY = appHeight*90/100;
   quitButtonWidth = appWidth*9/100;
   quitButtonHeight = appHeight*8/100;
   //Layout DIVs
