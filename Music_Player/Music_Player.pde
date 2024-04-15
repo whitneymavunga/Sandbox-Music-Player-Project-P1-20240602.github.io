@@ -9,7 +9,8 @@ float LibraryX, LibraryY, LibraryWidth, LibraryHeight;
 float SearchX, SearchY, SearchWidth, SearchHeight;
 float downloadsButtonX, downloadsButtonY, downloadsButtonWidth, downloadsButtonHeight;
 //
-color backgroundColour, darkBackground, whiteBackground  ;
+color backgroundColour, darkBackground, whiteBackground;
+Boolean whiteMode=false;
 //
 void setup() {
   //size(400, 500); //width, height
@@ -83,9 +84,10 @@ void setup() {
   //Variable Population
   darkBackground = 0; //Gray Scale, much smaller than COLOR
   whiteBackground = 255; //Gray Scale, much smaler than COLOR
+  //whiteMode = true //Must ask to see Bluelight;
   //if ( hour()>=9 && hour() <=17 )  backgroundColour = whiteBackground;
   //if ( hour()>9 && hour() <17 )  backgroundColour = darkBackground;
-  if (hour()>=9 && hour() <=17) {
+  if ( whiteMode==true && hour()>=9 && hour() <=17 ) {
     backgroundColour = whiteBackground;
   } else {
     backgroundColour = darkBackground;
