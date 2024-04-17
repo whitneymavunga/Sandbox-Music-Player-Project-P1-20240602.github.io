@@ -11,7 +11,7 @@ float downloadsButtonX, downloadsButtonY, downloadsButtonWidth, downloadsButtonH
 //
 color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
 color foregroundColour;
-color white=255, yellow=#FFFF00, black=0; //Hexadecimal, see Tools/ Colour Selector
+color white=255, yellow=#FFFF00, black=0, purple=#FF00FF; //Hexadecimal, see Tools/ Colour Selector
 Boolean whiteMode=true;
 //
 void setup() {
@@ -86,9 +86,9 @@ void setup() {
   //Variable Population
   //if ( hour()>=9 && hour() <=17 )  backgroundColour = whiteBackground;
   //if ( hour()>9 && hour() <17 )  backgroundColour = darkBackground;
-  if ( whiteMode==true && hour() >=9 && hour() <=17 ) {
+  if ( whiteMode==false && hour() >=9 && hour() <=17 ) {
     backgroundColour = whiteBackground;
-    foregroundColour = #FFFFFF; //
+    foregroundColour = black;
   } else {
     backgroundColour = darkBackground;
     foregroundColour =  yellow; //Note: if(hour()<9&&hour()>17) 
@@ -100,12 +100,26 @@ void setup() {
 void draw() {
   background(backgroundColour);
   fill(foregroundColour);
+  //
+  //QuitButton
+  fill(purple);
+  //if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight) fill (yellow);
+  if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight) {
+  fill (yellow);
+  rect(quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight, quitButtonWidth*5/7, quitButtonHeight  );
+   fill(foregroundColour);//Reset Defaults
+} else {
+  fill(purple);
+}
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
+  fill(foregroundColour);//Resetting the Defaults
+  println(mouseX, mouseY);
 } //End draw
 //
 void keyPressed() { //Listener
   if (key=='Q' || key=='q')exit();
-  if (key==CODED && keyCode==UP) exit();
+  if (key==CODED && keyCode==ESC) exit();
+  if (key=='W' || key=='w');
 } //End keyPressed
 //
 void mousePressed() { //Listener
