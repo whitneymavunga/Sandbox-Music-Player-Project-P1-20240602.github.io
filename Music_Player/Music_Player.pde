@@ -8,6 +8,9 @@ float RadioX, RadioY, RadioWidth, RadioHeight;
 float LibraryX, LibraryY, LibraryWidth, LibraryHeight;
 float SearchX, SearchY, SearchWidth, SearchHeight;
 float downloadsButtonX, downloadsButtonY, downloadsButtonWidth, downloadsButtonHeight;
+int size;
+PFont generalFont;
+String "Quit";
 //
 color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
 color foregroundColour;
@@ -23,6 +26,13 @@ void setup() {
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bro, turn your phone";
   println(displayInstructions);
   //
+  //Fonts from OS (Operating System)
+String[] fontList = PFont.list(); //To list all fonts available on OS
+printArray(fontList); //For listing all possible fonts to choose from, then createFont
+size = 55;
+generalFont = createFont("Harrington", size);
+// Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug 
+//
   //Population
   backgroundX = appWidth*0;
   backgroundY = appHeight*0;
@@ -114,6 +124,12 @@ void draw() {
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   fill(foregroundColour);//Resetting the Defaults
   println(mouseX, mouseY);
+  fill(purple); //Ink
+textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
+//Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
+size = 20; //Note: CS20 studies size algorithm
+textFont(titleFont, size);
+text(title, titleX, titleY, titleWidth, titleHeight);
 } //End draw
 //
 void keyPressed() { //Listener
