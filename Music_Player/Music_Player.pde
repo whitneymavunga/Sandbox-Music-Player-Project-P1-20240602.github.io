@@ -10,7 +10,7 @@ float SearchX, SearchY, SearchWidth, SearchHeight;
 float downloadsButtonX, downloadsButtonY, downloadsButtonWidth, downloadsButtonHeight;
 int size;
 PFont generalFont;
-String "Quit";
+String quit="Quit";
 //
 color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
 color foregroundColour;
@@ -29,8 +29,8 @@ void setup() {
   //Fonts from OS (Operating System)
 String[] fontList = PFont.list(); //To list all fonts available on OS
 printArray(fontList); //For listing all possible fonts to choose from, then createFont
-size = 55;
-generalFont = createFont("Harrington", size);
+size =  ( appWidth > appHeight ) ? appHeight : appWidth ; 
+generalFont = createFont("Georgia", size);
 // Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug 
 //
   //Population
@@ -111,25 +111,29 @@ void draw() {
   background(backgroundColour);
   fill(foregroundColour);
   //
-  //QuitButton
+  //Quit Button
+  //fill(purple);
+  //if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) fill(yellow);
   fill(purple);
-  //if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight) fill (yellow);
-  if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight) {
-  fill (yellow);
-  rect(quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight, quitButtonWidth*5/7, quitButtonHeight  );
-   fill(foregroundColour);//Reset Defaults
-} else {
-  fill(purple);
-}
+  rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
+  if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) {
+    fill(yellow);
+    rect( quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
+  } else {
+    fill(purple);
+  }
+  fill(foregroundColour); //Resetting the Defaults
+  //Quit, Text
+  fill(foregroundColour); //Ink
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   fill(foregroundColour);//Resetting the Defaults
   println(mouseX, mouseY);
   fill(purple); //Ink
 textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
 //Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
-size = 20; //Note: CS20 studies size algorithm
-textFont(titleFont, size);
-text(title, titleX, titleY, titleWidth, titleHeight);
+size = 40; //Note: CS20 studies size algorithm
+textFont(generalFont, size);
+text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
 } //End draw
 //
 void keyPressed() { //Listener
