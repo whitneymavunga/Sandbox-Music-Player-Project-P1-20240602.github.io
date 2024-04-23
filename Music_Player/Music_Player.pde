@@ -1,4 +1,18 @@
+/* Documentation
+//Library: use Sketch / Import Libary / Add Library / Minim
+*/
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 //Global Variables
+Minim minim; //creates object to access all fuction
+AudioPlayer soundEffects1;
+AudioPlayer playlist1;
+//
 int appWidth, appHeight;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight;
@@ -16,6 +30,7 @@ color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, not
 color foregroundColour;
 color white=255, yellow=#FFFF00, black=0, purple=#FF00FF; //Hexadecimal, see Tools/ Colour Selector
 Boolean whiteMode=true;
+
 //
 void setup() {
   //size(400, 500); //width, height
@@ -25,6 +40,13 @@ void setup() {
   //Landscape is HARDCODED
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bro, turn your phone";
   println(displayInstructions);
+  //
+  minim = new Minim(this);
+  String extension = ".mp3";
+  String quitButtonSound = "Spring_Attic_Door.mp3";
+  String pathway = "../Audio"; //Relative Path
+  // soundEffects1 = minim. loadFile(path);
+  //playList1 = minim. loadFile(path);
   //
   //Fonts from OS (Operating System)
 String[] fontList = PFont.list(); //To list all fonts available on OS
@@ -49,7 +71,7 @@ generalFont = createFont("Georgia", size);
   quitButtonX = appWidth*88/100;
   quitButtonY = appHeight*90/100;
   quitButtonWidth = appWidth*9/100;
-  quitButtonHeight = appHeight*8/100;
+  quitButtonHeight = appHeight*100/100;
   RadioX = appWidth*3.45/8;
   RadioY = appHeight*6.5/9;
   RadioWidth = appWidth*2/8;
