@@ -44,13 +44,16 @@ void setup() {
   minim = new Minim(this);
   String extension = ".mp3";
   String quitButtonSound = "Spring_Attic_Door.mp3";
-  String pathway = "../Audio"; //Relative Path
-  // soundEffects1 = minim. loadFile(path);
+  String pathwaysoundEffects = "../audio/soundEffects"; //Relative Path
+  //println(pathwaysoundEffects+quitButtonSound+extension);
+  String path = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
+  //println(path);
+  soundEffects1 = minim. loadFile(path);
   //playList1 = minim. loadFile(path);
   //
   //Fonts from OS (Operating System)
-String[] fontList = PFont.list(); //To list all fonts available on OS
-printArray(fontList); //For listing all possible fonts to choose from, then createFont
+//String[] fontList = PFont.list(); //To list all fonts available on OS
+//printArray(fontList); //For listing all possible fonts to choose from, then createFont
 size =  ( appWidth > appHeight ) ? appHeight : appWidth ; 
 generalFont = createFont("Georgia", size);
 // Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug 
@@ -127,6 +130,8 @@ generalFont = createFont("Georgia", size);
     if ( hour()>=9 && hour()<=17 ) foregroundColour = white;
   }
   //
+  soundEffects1.loop();
+  
 } //End setup
 //
 void draw() {
@@ -162,12 +167,18 @@ void keyPressed() { //Listener
   if (key=='Q' || key=='q')exit();
   if (key==CODED && keyCode==ESC) exit();
   if (key=='W' || key=='w');
+  
+   soundEffects1.loop(0);
+  
 } //End keyPressed
 //
 void mousePressed() { //Listener
 //QUIT
 if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight)
 {
+  
+  soundEffects1.loop(0);
+  delay(3000);
   exit();
 }
 
