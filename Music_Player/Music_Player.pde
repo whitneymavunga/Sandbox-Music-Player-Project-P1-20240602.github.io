@@ -1,6 +1,7 @@
 /* Documentation
 //Library: use Sketch / Import Libary / Add Library / Minim
 */
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -71,10 +72,10 @@ generalFont = createFont("Georgia", size);
   playbuttonY = appHeight*6.5/9;
   playButtonWidth = appWidth*1.5/8;
   playButtonHeight = appHeight*1/16;
-  quitButtonX = appWidth*88/100;
-  quitButtonY = appHeight*90/100;
-  quitButtonWidth = appWidth*9/100;
-  quitButtonHeight = appHeight*100/100;
+  quitButtonX = appWidth*0/100;
+  quitButtonY = appHeight*0/100;
+  quitButtonWidth = appWidth*10/100;
+  quitButtonHeight = appHeight*7/100;
   RadioX = appWidth*3.45/8;
   RadioY = appHeight*6.5/9;
   RadioWidth = appWidth*2/8;
@@ -130,7 +131,6 @@ generalFont = createFont("Georgia", size);
     if ( hour()>=9 && hour()<=17 ) foregroundColour = white;
   }
   //
-  soundEffects1.loop();
   
 } //End setup
 //
@@ -168,7 +168,6 @@ void keyPressed() { //Listener
   if (key==CODED && keyCode==ESC) exit();
   if (key=='W' || key=='w');
   
-   soundEffects1.loop(0);
   
 } //End keyPressed
 //
@@ -177,8 +176,6 @@ void mousePressed() { //Listener
 if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight)
 {
   
-  soundEffects1.loop(0);
-  delay(3000);
   exit();
 }
 
