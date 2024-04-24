@@ -17,7 +17,7 @@ AudioPlayer playlist1;
 int appWidth, appHeight;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight;
-float playButtonX, playbuttonY, playButtonWidth, playButtonHeight;
+float playButtonX, playButtonY, playButtonWidth, playButtonHeight;
 float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 float RadioX, RadioY, RadioWidth, RadioHeight;
 float LibraryX, LibraryY, LibraryWidth, LibraryHeight;
@@ -29,7 +29,7 @@ String quit="Quit";
 //
 color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
 color foregroundColour;
-color white=255, yellow=#FFFF00, black=0, purple=#FF00FF; //Hexadecimal, see Tools/ Colour Selector
+color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
 Boolean whiteMode=true;
 
 //
@@ -68,10 +68,10 @@ generalFont = createFont("Georgia", size);
   StarTunesY = appHeight*15/100;
   StarTunesWidth = appWidth*64/100;
   StarTunesHeight = appHeight*6/16; // Fraction Example
-  playButtonX = appWidth*3.45/8;
-  playbuttonY = appHeight*6.5/9;
-  playButtonWidth = appWidth*1.5/8;
-  playButtonHeight = appHeight*1/16;
+  playButtonX = appWidth*3.45/10;
+  playButtonY = appHeight*7/10;
+  playButtonWidth = appWidth*3/10;
+  playButtonHeight = appHeight*1.5/16;
   quitButtonX = appWidth*0/100;
   quitButtonY = appHeight*0/100;
   quitButtonWidth = appWidth*10/100;
@@ -92,7 +92,7 @@ generalFont = createFont("Georgia", size);
   int centerY = appHeight*1/2;
   //rect(centerX*1/2, centerY*1/2, appWidth*1/2, appHeight*1/2);
   //rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
-  //rect(playButtonX, playbuttonY, playButtonWidth, playButtonHeight);
+  //rect(playButtonX, playButtonY, playButtonWidth, playButtonHeight);
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   //rect(RadioX, RadioY, RadioWidth, RadioHeight);
   //rect(LibraryX, LibraryY, LibraryWidth, LibraryHeight);
@@ -155,12 +155,36 @@ void draw() {
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   fill(foregroundColour);//Resetting the Defaults
   println(mouseX, mouseY);
-  fill(purple); //Ink
-textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
+  fill(red); //Ink
+textAlign(BOTTOM, BOTTOM); //Align X&Y, see Precessing.org / Reference
 //Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
 size = 40; //Note: CS20 studies size algorithm
 textFont(generalFont, size);
 text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
+
+//playButton
+ //fill(red);
+  //rect(playButtonX, playButtonY, playButtonWidth, playButtonHeight);
+  //if ( mouseX>playButtonX && mouseX<playButtonX+quitButtonWidth && mouseY>playButtonY && mouseY<playButtonY+playButtonHeight ) {
+   // fill(yellow);
+    //rect( playButtonX+playButtonWidth*1/7, playButtonY+playButtonHeight*1/7, playButtonWidth*5/7, playButtonHeight*5/7);
+  //} else {
+    //fill(red);
+  //}
+  //fill(foregroundColour); //Resetting the Defaults
+  //PLAY, Text
+  //fill(foregroundColour); //Ink
+  //rect(playButtonX, playButtonY, playButtonWidth, playButtonHeight);
+  //fill(foregroundColour);//Resetting the Defaults
+  //println(mouseX, mouseY);
+  //fill(red); //Ink
+//textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
+//Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
+//size = 40; //Note: CS20 studies size algorithm
+//textFont(generalFont, size);
+//text(playButtonX+playButtonWidth*1/7, playButtonY+playButtonHeight*1/7, playButtonWidth*5/7, playButtonHeight*5/7);
+
+
 } //End draw
 //
 void keyPressed() { //Listener

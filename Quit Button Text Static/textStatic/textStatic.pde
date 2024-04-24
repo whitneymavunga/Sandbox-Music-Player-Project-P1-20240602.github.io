@@ -2,7 +2,7 @@
 float titleX, titleY, titleWidth, titleHeight;
 float bottomX, bottomY, bottomWidth, bottomHeight;
 PFont titleFont, bottomFont;
-String title="Let it Go!", bottom="You did it!";
+String title="wahoo!", bottom="Let it go!";
 int size;
 color red=#FF1B1B , purple=#FF00FF;
 //
