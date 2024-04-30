@@ -109,11 +109,14 @@ void draw() {
   fill(foregroundColour);//Resetting the Defaults
   println(mouseX, mouseY);
   fill(red); //Ink
-textAlign(BOTTOM, BOTTOM); //Align X&Y, see Precessing.org / Reference
+textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
 //Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
 size = 40; //Note: CS20 studies size algorithm
 textFont(generalFont, size);
 text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
+
+Star Tunes image
+rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
 
 } //End draw
 //
