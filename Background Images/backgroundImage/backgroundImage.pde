@@ -2,7 +2,7 @@
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 int appWidth, appHeight, brightness=255;
 PImage  backgroundImage;
-Boolean lightMode=true, dayMode=false, nightMode=false;
+Boolean lightMode=true, dayMode=false, nightMode=false, darkMode=true;
 //Boolean darkmode=false; //See keyPressed for NOTE
 //
 void setup() {
@@ -33,15 +33,15 @@ void setup() {
 void draw() {
   background(255); //Day Mode, Light Mode ON / OFF
   //NOTE: lightMode ON = max saturation
-  if( lightMode == true) {
+  if( darkMode == true) {
   brightness = 255;
   } else {
     brightness = 1; //USER Preference: lowest brightness
 }
-  tint(255, brightness);
+  tint(100, brightness);
   image(backgroundImage, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   //
-  println(lightMode);
+  println(darkMode);
 } //End Draw
 //
 void mousePressed() {
