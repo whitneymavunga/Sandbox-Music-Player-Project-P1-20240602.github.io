@@ -1,5 +1,5 @@
 /* Documentation
-*/
+ */
 //Library
 import ddf.minim.*;
 import ddf.minim.analysis.*;
@@ -22,7 +22,7 @@ color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, not
 color foregroundColour;
 color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
 Boolean whiteMode=true;
-
+Boolean lightmode=false;
 //
 void setup() {
   //size(400, 500); //width, height
@@ -44,14 +44,14 @@ void setup() {
   //playList1 = minim. loadFile(path);
   //
   //Fonts from OS (Operating System)
-//String[] fontList = PFont.list(); //To list all fonts available on OS
-//printArray(fontList); //For listing all possible fonts to choose from, then createFont
-size =  ( appWidth > appHeight ) ? appHeight : appWidth ; 
-generalFont = createFont("Georgia", size);
-// Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug 
- //
+  //String[] fontList = PFont.list(); //To list all fonts available on OS
+  //printArray(fontList); //For listing all possible fonts to choose from, then createFont
+  size =  ( appWidth > appHeight ) ? appHeight : appWidth ;
+  generalFont = createFont("Georgia", size);
+  // Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug
+  //
   divs();
- //
+  //
   /*
   rect(X, Y, Width, Height);
    rect(X, Y, Width, Height);
@@ -75,8 +75,11 @@ generalFont = createFont("Georgia", size);
   //Variable Population
   //if ( hour()>=9 && hour()<=17 ) backgroundColour = whiteBackground;
   //if ( hour()<9 && hour()>17 ) backgroundColour = darkBackground;
-  if ( whiteMode==true && hour()>=9 && hour()<=17 ) {
+  if ( dayMode==true && hour()>=9 && hour()<=17 ) {
     backgroundColour = whiteBackground;
+    foregroundColour = black;
+  } else {
+     backgroundColour = whiteBackground;
     foregroundColour = black;
   } else {
     backgroundColour = darkBackground;
@@ -88,7 +91,19 @@ generalFont = createFont("Georgia", size);
 } //End setup
 //
 void draw() {
-  background(backgroundColour);
+   //Display
+  // background(backgroundColour); //Hardcoded Backgorund Colour Out, use IF to change
+  if ( lightMode == true ) { //Boolean keyBind
+    backgroundImageName = haumea; //fireforce
+    path = pathway + landscape_Square + backgroundImageName + extension;
+    backgroundImage = loadImage( path );
+  } else {
+    backgroundImageName = pexelphoto;
+    path = pathway + portrait + backgroundImageName + extension;
+    backgroundImage = loadImage( path );
+  if (lightmode) {
+  }
+  image(backgroundImage, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   fill(foregroundColour);
   //
   //Quit Button
@@ -109,37 +124,43 @@ void draw() {
   fill(foregroundColour);//Resetting the Defaults
   println(mouseX, mouseY);
   fill(red); //Ink
-textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
-//Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
-size = 40; //Note: CS20 studies size algorithm
-textFont(generalFont, size);
-text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
+  textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
+  //Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
+  size = 40; //Note: CS20 studies size algorithm
+  textFont(generalFont, size);
+  text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
 
-Star Tunes image
-rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
-
+  //rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
 } //End draw
 //
 void keyPressed() { //Listener
-  if (key=='Q' || key=='q')exit();
+  if (key=='R' || key=='r')exit();
   {
-   //soundeffect_1();
+    //soundeffect_1();
   }
   if (key==CODED && keyCode==ESC) exit();
   {
-   //soundeffect_1();
+    //soundeffect_1();
   }
   if (key=='W' || key=='w');
-  
+
+  //CAUTION, must return to "Request White, Light Mode"
+  if ( key=='W' || key=='w' ) { //Day Mode, White Light Containing Blue Colour
+    if (  lightMode == false ) {
+      lightMode = true;  //Light Mode ON
+    } else {
+      lightMode = false; //Dark Mode ON, no darkMode Boolean required
+    }
+  } //End Day Mode
+   //
   //soundEffects1.loop(0);
 } //End keyPressed
 //
 void mousePressed() { //Listener
-if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight)
-{
-  //soundeffect_1();
-}
-
+  if (mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight)
+  {
+    //soundeffect_1();
+  }
 } //End mousePressed
 //
 // End MAIN Program
