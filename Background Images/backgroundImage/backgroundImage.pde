@@ -21,7 +21,7 @@ void setup() {
   String backgroundImageName = haumea;
   String extension = ".jpg";
   String pathway = "../../../Images/";
-  String landscape_Square = "Landscape & Square Images/";
+  String landscape_Square = "landscape & square images/";
   String portrait = "Portrait/";
   //String path = pathway + landscape_Square + backgroundImageName + extension;
   String path = pathway + portrait + backgroundImageName + extension;
@@ -47,18 +47,15 @@ void draw() {
 void mousePressed() {
 }//End MousePressed
 //
-void keyPressed() {
+void keyPressed() {//Key Board Short Cuts for Mouse Pressing Prototyping
   if ( key=='W' || key=='w' ) { //Day Mode, White Light Containing Blue Colour
-    if (lightMode==false) {
-      lightMode = true;
+    if (  lightMode == false ) {
+      lightMode = true;  //Light Mode ON
     } else {
-     lightMode = false; 
+      lightMode = false; //Dark Mode ON, no darkMode Boolean required
     }
-  }//End Day Mode
-  {
-    
-  }//End Night Mode
-  
- //End KeyPressed
+  } //End Day Mode
+  //if () {} //End Night Mode
+}//End KeyPressed
 //
 //End MAIN Program
