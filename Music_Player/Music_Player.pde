@@ -13,6 +13,8 @@ Minim minim; //creates object to access all functions
 AudioPlayer soundEffects1;
 AudioPlayer playList1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 //
+float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
+String path, pathway, extension;
 int appWidth, appHeight;
 int size;
 PFont generalFont;
@@ -21,8 +23,10 @@ String quit="Quit";
 color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
 color foregroundColour;
 color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
-Boolean whiteMode=true;
-Boolean lightmode=false;
+Boolean dayMode=false;
+Boolean lightMode=false;
+PImage backgroundImageName, backgroundFileName, backgroundImage, haumea, pexelsphoto;
+//
 //
 void setup() {
   //size(400, 500); //width, height
@@ -38,9 +42,9 @@ void setup() {
   String quitButtonSound = "Spring_Attic_Door.mp3";
   String pathwaysoundEffects = "../audio/soundEffects"; //Relative Path
   //println(pathwaysoundEffects+quitButtonSound+extension);
-  String path = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
+  String pathway = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
   //println(path);
-  soundEffects1 = minim. loadFile(path);
+  soundEffects1 = minim. loadFile(pathway);
   //playList1 = minim. loadFile(path);
   //
   //Fonts from OS (Operating System)
@@ -73,37 +77,46 @@ void setup() {
    */
   //
   //Variable Population
+  //
+  //Time Calculations
   //if ( hour()>=9 && hour()<=17 ) backgroundColour = whiteBackground;
   //if ( hour()<9 && hour()>17 ) backgroundColour = darkBackground;
-  if ( dayMode==true && hour()>=9 && hour()<=17 ) {
-    backgroundColour = whiteBackground;
-    foregroundColour = black;
-  } else {
-     backgroundColour = whiteBackground;
-    foregroundColour = black;
+  if ( lightMode==true && hour()>=9 && hour()<=17 ) { 
+    if ( lightMode==true ) { 
+      backgroundColour = whiteBackground;
+      foregroundColour = black;
+      backgroundImageName = haumea;
+      path = pathway + backgroundFileName + backgroundImageName + extension;
+      // CONTINUE HERE
+      backgroundImage = loadImage( path );
+    } else {
+      backgroundColour = black;
+      foregroundColour = whiteBackground;
+      backgroundImageName = pexelsphoto;
+      path = pathway + backgroundFileName + backgroundImageName + extension;
+      backgroundImage = loadImage( path );
+    } //End Light & Dark Modes
   } else {
     backgroundColour = darkBackground;
     foregroundColour = yellow; //Note: if(hour()<9&&hour()>17)
-    if ( hour()>=9 && hour()<=17 ) foregroundColour = white;
+    //TURN OFF, adjusted above
+    //if ( hour()>=9 && hour()<=17 ) foregroundColour = white;
   }
   //
   //soundEffects1.loop();
 } //End setup
 //
 void draw() {
-   //Display
-  // background(backgroundColour); //Hardcoded Backgorund Colour Out, use IF to change
-  if ( lightMode == true ) { //Boolean keyBind
-    backgroundImageName = haumea; //fireforce
-    path = pathway + landscape_Square + backgroundImageName + extension;
-    backgroundImage = loadImage( path );
+  //Display
+  // background(backgroundColour); 
+  if ( lightMode == true ) {
+    //CAUTION: See setup
   } else {
-    backgroundImageName = pexelphoto;
-    path = pathway + portrait + backgroundImageName + extension;
+    backgroundImageName = pexelsphoto;
+    path = pathway + backgroundFileName + backgroundImageName + extension;
     backgroundImage = loadImage( path );
-  if (lightmode) {
   }
-  image(backgroundImage, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
+  //image( backgroundImage, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   fill(foregroundColour);
   //
   //Quit Button
@@ -120,17 +133,20 @@ void draw() {
   fill(foregroundColour); //Resetting the Defaults
   //Quit, Text
   fill(foregroundColour); //Ink
-  rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
-  fill(foregroundColour);//Resetting the Defaults
-  println(mouseX, mouseY);
-  fill(red); //Ink
-  textAlign(CENTER, CENTER); //Align X&Y, see Precessing.org / Reference
-  //Values: [LEFT| CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]]
-  size = 40; //Note: CS20 studies size algorithm
+  textAlign( CENTER, CENTER ); //Align X&Y, see Processing.org / Reference
+  //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
+  size = appHeight*1/23; // Var based on ratio of display
   textFont(generalFont, size);
-  text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
+  text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7); //Inside rect() above
+  fill(foregroundColour); //Resetting the Defaults
+  //
+  //Album Cover Image
+  rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
+  //
 
-  //rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
+
+  //println(mouseX, mouseY);
+  //
 } //End draw
 //
 void keyPressed() { //Listener
