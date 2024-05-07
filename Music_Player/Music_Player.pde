@@ -13,22 +13,29 @@ Minim minim; //creates object to access all functions
 AudioPlayer soundEffects1;
 AudioPlayer playList1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 //
-float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
-String path, pathway, extension;
 int appWidth, appHeight;
+//
 int size;
 PFont generalFont;
 String quit="Quit";
 //
-color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
-color foregroundColour;
 color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
 Boolean dayMode=false;
 Boolean lightMode=false;
-PImage backgroundImageName, backgroundFileName, backgroundImage, haumea, pexelsphoto;
+//
+color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
+color foregroundColour;
+//
+String pathDarkBackgroundImage, pathLightBackgroundImage; 
+PImage backgroundImageName, backgroundFileName;
+PImage backgroundImage;
+PImage StarTunesImage;
+float StarTunesRIGHT, StarTunesCENTERED, StarTunesLEFT;
+float StarTunesWidthAdjusted, StarTunesHeightAdjusted;
 //
 //
 void setup() {
+  //Display
   //size(400, 500); //width, height
   fullScreen(); //displayWidth, displayHeight
   appWidth = displayWidth;
@@ -38,13 +45,13 @@ void setup() {
   println(displayInstructions);
   //
   minim = new Minim(this);
-  String extension = ".mp3";
-  String quitButtonSound = "Spring_Attic_Door.mp3";
   String pathwaysoundEffects = "../audio/soundEffects"; //Relative Path
+  String quitButtonSound = "Spring_Attic_Door.mp3";
+  String extension = ".mp3";
   //println(pathwaysoundEffects+quitButtonSound+extension);
-  String pathway = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
+  String path = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
   //println(path);
-  soundEffects1 = minim. loadFile(pathway);
+  soundEffects1 = minim. loadFile(path);
   //playList1 = minim. loadFile(path);
   //
   //Fonts from OS (Operating System)
@@ -77,47 +84,82 @@ void setup() {
    */
   //
   //Variable Population
+  //Images
+  String haumea = "haumea___fire_force__minimalist_wallpaper__by_nquitcoph_deaprdr-414w-2x";
+  String pexelsphoto = "pexels-photo-1679719";
+  String starslogo = "Stars-Logo-Graphics-1-3-580x386";
+  String extensionJPG = ".jpg";
+  String pathway = "../../Images/";
+  String portrait = "Portrait/";
+  String backgroundFileName = "Background Image/";
+  pathLightBackgroundImage = pathway + portrait + haumea + extensionJPG;
+  pathDarkBackgroundImage = pathway + portrait + pexelsphoto + extensionJPG;
+  String StarTunesImagePath = pathway + portrait + starslogo + extensionJPG;
+  StarTunesImage = loadImage(StarTunesImagePath );
+  //
+  //Image Aspect Ratio Calculations
+  //NOTE: IF-Else & WHILE to Adjust Aspect Ratio Dimensions
+  //Forms a Procedure for Aspect Ratios of all Images ( copy and paste in setup() )
+  float smallerStarTunesDimension = ( StarTunesWidth < StarTunesHeight ) ? StarTunesWidth : StarTunesHeight ;
+  float StarTunesImageWidthPixel = 800.0; //Origonally INTs, ratio will be decimal
+  float StarTunesImageHeightPixel = 600.0; //CAUTION: must avoid truncation to ZERO Value
+  float StarTunesAspectRatio = StarTunesImageWidthPixel/StarTunesImageHeightPixel;
+  float largerStarTunesDimension = smallerStarTunesDimension*StarTunesAspectRatio; //Apsect Ratio
+  if ( StarTunesWidth < largerStarTunesDimension ) { //Image will not fit into DIV rect()
+    while ( StarTunesWidth < largerStarTunesDimension ) {
+      largerStarTunesDimension -= 1;
+      smallerStarTunesDimension -= 1;
+      //NOTE: ratios like percent are not linear decreases in both directions
+    }
+  }
+  StarTunesWidthAdjusted = largerStarTunesDimension;
+  StarTunesHeightAdjusted = smallerStarTunesDimension;
+  //
+  /*Image can be centered, left justified, or right justified on the larger dimension
+   LEFT: X-value of image same as rect()
+   CENTERED: X-value of image = albumCoverX + (albumCoverWidth-albumCoverWidthAdjusted)/2;
+   RIGHT: X-value of image = albumCoverX+albumCoverWidth-albumCoverWidthAdjusted;
+   */
+  StarTunesRIGHT = StarTunesX;
+  StarTunesCENTERED = StarTunesX + (StarTunesWidth-StarTunesWidthAdjusted)/2;
+  StarTunesLEFT =X+StarTunesWidth-StarTunesWidthAdjusted;
+  //
   //
   //Time Calculations
   //if ( hour()>=9 && hour()<=17 ) backgroundColour = whiteBackground;
   //if ( hour()<9 && hour()>17 ) backgroundColour = darkBackground;
-  if ( lightMode==true && hour()>=9 && hour()<=17 ) { 
-    if ( lightMode==true ) { 
-      backgroundColour = whiteBackground;
-      foregroundColour = black;
-      backgroundImageName = haumea;
-      path = pathway + backgroundFileName + backgroundImageName + extension;
-      // CONTINUE HERE
-      backgroundImage = loadImage( path );
-    } else {
-      backgroundColour = black;
-      foregroundColour = whiteBackground;
-      backgroundImageName = pexelsphoto;
-      path = pathway + backgroundFileName + backgroundImageName + extension;
-      backgroundImage = loadImage( path );
-    } //End Light & Dark Modes
+  if ( hour()>=9 && hour()<=17 ) dayMode=true; //Day & Night Mode Clock Choice
+  println();
+  if ( dayMode==true && lightMode==true ) { //Light & Dark Modes
+    backgroundColour = whiteBackground;
+    foregroundColour = black;
+    backgroundImage = loadImage( pathLightBackgroundImage ); //Changing this Variable with 3 different images
+  } else if ( lightMode==false ) {
+    backgroundColour = black;
+    foregroundColour = whiteBackground;
+    backgroundImage = loadImage( pathDarkBackgroundImage );
   } else {
     backgroundColour = darkBackground;
     foregroundColour = yellow; //Note: if(hour()<9&&hour()>17)
-    //TURN OFF, adjusted above
-    //if ( hour()>=9 && hour()<=17 ) foregroundColour = white;
+    backgroundImage = loadImage( pathDarkBackgroundImage );
   }
   //
   //soundEffects1.loop();
 } //End setup
 //
 void draw() {
-  //Display
-  // background(backgroundColour); 
-  if ( lightMode == true ) {
+    //Display
+  // background(backgroundColour); //Hardcoded Backgorund Colour Out, use IF to change
+  if ( dayMode=true && lightMode == true ) { //Boolean keyBind, Logical Shortcut
     //CAUTION: See setup
+    backgroundImage = loadImage( pathLightBackgroundImage );
+  } else if ( lightMode == false ) {
+    backgroundImage = loadImage( pathDarkBackgroundImage );
   } else {
-    backgroundImageName = pexelsphoto;
-    path = pathway + backgroundFileName + backgroundImageName + extension;
-    backgroundImage = loadImage( path );
+    tint(255, 255, 255, 0); //no blue;
   }
-  //image( backgroundImage, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
-  fill(foregroundColour);
+  image( backgroundImage, backgroundX, backgroundY, backgroundWidth, backgroundHeight);
+  //fill(foregroundColour);
   //
   //Quit Button
   //fill(purple);
@@ -140,14 +182,14 @@ void draw() {
   text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7); //Inside rect() above
   fill(foregroundColour); //Resetting the Defaults
   //
-  //Album Cover Image
-  rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
+  //Albumn Cover Image
+  image( StarTunesImage, StarTunesCENTERED, StarTunesY, StarTunesWidthAdjusted, StarTunesHeightAdjusted );
   //
-
-
   //println(mouseX, mouseY);
   //
 } //End draw
+//
+
 //
 void keyPressed() { //Listener
   if (key=='R' || key=='r')exit();

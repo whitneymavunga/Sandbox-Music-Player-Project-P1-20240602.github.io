@@ -6,6 +6,7 @@ float RadioX, RadioY, RadioWidth, RadioHeight;
 float LibraryX, LibraryY, LibraryWidth, LibraryHeight;
 float SearchX, SearchY, SearchWidth, SearchHeight;
 float downloadsButtonX, downloadsButtonY, downloadsButtonWidth, downloadsButtonHeight;
+float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 //
 void divs() {
   population();
@@ -45,7 +46,7 @@ void drawRects() { //Layout DIVs
   int centerX = appWidth*1/2;
   int centerY = appHeight*1/2;
   //rect(centerX*1/2, centerY*1/2, appWidth*1/2, appHeight*1/2);
-  rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
+  //rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
   //rect(playButtonX, playButtonY, playButtonWidth, playButtonHeight);
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   //rect(RadioX, RadioY, RadioWidth, RadioHeight);
