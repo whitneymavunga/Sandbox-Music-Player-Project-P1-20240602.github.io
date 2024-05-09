@@ -27,7 +27,7 @@ color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, not
 color foregroundColour;
 //
 String pathDarkBackgroundImage, pathLightBackgroundImage; 
-PImage backgroundImageName, backgroundFileName;
+PImage haumea, shinra, starslogo;
 PImage backgroundImage;
 PImage StarTunesImage;
 float StarTunesRIGHT, StarTunesCENTERED, StarTunesLEFT;
@@ -86,14 +86,16 @@ void setup() {
   //Variable Population
   //Images
   String haumea = "haumea___fire_force__minimalist_wallpaper__by_nquitcoph_deaprdr-414w-2x";
-  String pexelsphoto = "pexels-photo-1679719";
+  String shinra = "fire-force-season-1-cour-2-1190407-1280x0-1-800x449";
   String starslogo = "Stars-Logo-Graphics-1-3-580x386";
   String extensionJPG = ".jpg";
+  String extensionJPEG = ".jpeg";
   String pathway = "../../Images/";
   String portrait = "Portrait/";
+  String landscape_Square = "Landscape & Square Images/";
   String backgroundFileName = "Background Image/";
   pathLightBackgroundImage = pathway + portrait + haumea + extensionJPG;
-  pathDarkBackgroundImage = pathway + portrait + pexelsphoto + extensionJPG;
+  pathDarkBackgroundImage = pathway + landscape_Square + shinra + extensionJPEG;
   String StarTunesImagePath = pathway + portrait + starslogo + extensionJPG;
   StarTunesImage = loadImage(StarTunesImagePath );
   //
