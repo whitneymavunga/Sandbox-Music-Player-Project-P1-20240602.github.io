@@ -17,7 +17,7 @@ int appWidth, appHeight;
 //
 int size;
 PFont generalFont;
-String quit="Quit";
+String quit="QUIT";
 //
 color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
 Boolean dayMode=false;
@@ -44,20 +44,20 @@ void setup() {
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bro, turn your phone";
   println(displayInstructions);
   //
-  minim = new Minim(this);
-  String pathwaysoundEffects = "../audio/soundEffects"; //Relative Path
-  String quitButtonSound = "Spring_Attic_Door.mp3";
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
+  String pathwaySoundEffects = "../Audio/SoundEffect/"; //Relative Path
+  String quitButtonSound = "CarDoorClosing";
   String extension = ".mp3";
-  //println(pathwaysoundEffects+quitButtonSound+extension);
-  String path = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
-  //println(path);
-  soundEffects1 = minim. loadFile(path);
-  //playList1 = minim. loadFile(path);
+  //println ( pathwaySoundEffects+quitButtonSound+extension );
+  String path = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
+  //println ( path );
+  soundEffects1 = minim.loadFile( path );
+  //playList1 = minim.loadFile( path );
   //
   //Fonts from OS (Operating System)
   //String[] fontList = PFont.list(); //To list all fonts available on OS
   //printArray(fontList); //For listing all possible fonts to choose from, then createFont
-  size =  ( appWidth > appHeight ) ? appHeight : appWidth ;
+  size = ( appWidth > appHeight ) ? appHeight : appWidth ;
   generalFont = createFont("Georgia", size);
   // Tools / Create Font / Find Font / Use Size Field / Do not press "OK", known Bug
   //
@@ -85,8 +85,8 @@ void setup() {
   //
   //Variable Population
   //Images
-  String haumea = "haumea___fire_force__minimalist_wallpaper__by_nquitcoph_deaprdr-414w-2x";
   String shinra = "fire-force-season-1-cour-2-1190407-1280x0-1-800x449";
+  String haumea = "haumea___fire_force__minimalist_wallpaper__by_nquitcoph_deaprdr-414w-2x";
   String starslogo = "Stars-Logo-Graphics-1-3-580x386";
   String extensionJPG = ".jpg";
   String extensionJPEG = ".jpeg";
@@ -94,8 +94,8 @@ void setup() {
   String portrait = "Portrait/";
   String landscape_Square = "Landscape & Square Images/";
   String backgroundFileName = "Background Image/";
-  pathLightBackgroundImage = pathway + portrait + haumea + extensionJPG;
-  pathDarkBackgroundImage = pathway + landscape_Square + shinra + extensionJPEG;
+  pathDarkBackgroundImage = pathway + portrait + haumea + extensionJPG;
+  pathLightBackgroundImage = pathway + landscape_Square + shinra + extensionJPEG;
   String StarTunesImagePath = pathway + portrait + starslogo + extensionJPG;
   StarTunesImage = loadImage(StarTunesImagePath );
   //
@@ -166,7 +166,7 @@ void draw() {
   //Quit Button
   //fill(purple);
   //if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) fill(yellow);
-  fill(purple);
+   fill(purple);
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) {
     fill(yellow);
@@ -184,7 +184,8 @@ void draw() {
   text(quit, quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7); //Inside rect() above
   fill(foregroundColour); //Resetting the Defaults
   //
-  //Albumn Cover Image
+  //
+  //StarTunes Cover Image
   image( StarTunesImage, StarTunesCENTERED, StarTunesY, StarTunesWidthAdjusted, StarTunesHeightAdjusted );
   //
   //println(mouseX, mouseY);
