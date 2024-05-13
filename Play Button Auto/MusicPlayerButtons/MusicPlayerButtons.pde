@@ -37,12 +37,13 @@ void setup () {
   soundEffects1 = minim.loadFile( pathQuitButtonSound );
   playList1 = minim.loadFile ( "pathsolitudedark" ); //"" is compiler error
   //
-  playList1.loop();
+  //playList1.loop(0);
   //
 } //End Setup
 //
 void draw() {
 println(Repeating)
+playList1.loop(0);
 } //End Draw
 //
 void keyPressed() {} //End  keyPressed
