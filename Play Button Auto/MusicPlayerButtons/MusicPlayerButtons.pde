@@ -16,6 +16,8 @@ int currentSong = 0; //JAVA starts at 0, no for all languages
 //
 int appWidth, appHeight;
 //
+Boolean looping=false;
+//
 void setup () {
   //Display
   //size(400, 500); //width, height
@@ -26,7 +28,7 @@ void setup () {
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bro, turn your phone";
   println(displayInstructions);
   //
-   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
+  minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
   String pathwaySoundEffects = "../Audio/SoundEffect/"; //Relative Path
   String pathwayMusic = "../../audio/My Music/";
   String quitButtonSound = "CarDoorClosing";
@@ -37,8 +39,8 @@ void setup () {
   String pathQuitButtonSound = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
   String pathsolitudedark = sketchPath( pathwaySoundEffects + solitudedark + extension ); //Absolute Path
   println ( "Absolute Pathway", pathsolitudedark ); //pathQuitButtonSound
-  soundEffects[0] = minim.loadFile [pathQuitButtonSound];
-  playList[0] = minim.loadFile [ "pathsolitudedark" ]; //"" is compiler error
+  //soundEffects[0] = minim.loadFile [pathQuitButtonSound];
+  //playList[0] = minim.loadFile [ "pathsolitudedark" ]; //"" is compiler error
   //
   //playList1.loop(0);
   //
@@ -53,24 +55,35 @@ void draw() {
   /*Note: For Loop Feature
    Easter Egg: program time for number of song loops
    Alternate to timer for music player, times to the end of a song
+   */
    if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()!=-1 ) println("There are", playList[currentSong].loopCount(), "loops left.");
    if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()==-1 ) println("Looping Infinitely");
-   */
+   println("KeyBoard Looping question")
   //
   if ( !playList[currentSong].isPlaying() ) println( "Nothing is playing, Pick a Song" );
   if ( playList[currentSong].isPlaying() && !playList[currentSong].isLooping() ) println("Play Once");
   //
-  /*
-   // Auto Play Code for Future Use
-  // Contains instructions from Key Board Short Cuts
+  /* Auto Play Code for Future Use
+   Contains instructions from Key Board Short Cuts
+   Note: PAIN Thresholds, 3 minutes & 75%, can be variables
+   Note: Variables can be set in a Menu Button
+   */
   if ( playList[currentSong].isPlaying() ) {
     //Empty IF is FALSE
+  } else if ( playList[currentSong].length() < 180000 ) { //PAIN Minutes is 3, 180s, 180,000ms
+    //TRUE: if song is less than 3 minutes, STOP, I want to hear it from the beginning
+    //Pause is actually STOP
+    playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
   } else if ( !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.75 ) ) { //Calc PAIN #
     //TRUE: if 75% played, we need a STOP & Rewind Button
-    playList[currentSong].rewind(); //CAUTION: !.isPlaying() & .rewind() = STOP
-    //currentSong = currentSong + 1; //currentSong++; currentSong+=1
-    //playList[currentSong].play();
-  } else {}
+    playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
+    //
+    /* Future coding
+     currentSong = currentSong + 1; //currentSong++; currentSong+=1
+     playList[currentSong].play();
+     */
+  } else {
+  }
   /* Previous IF-Else
    if ( playList[currentSong].isPlaying() ) {
    //Empty IF, TRUE
@@ -89,6 +102,19 @@ void keyPressed() {
       playList[currentSong].play(); //playList[currentSong].pause();
     }
   } //End Play Pause Button
+  if ( key=='L' || key=='l') { //Loop Once
+  playList[currentSong].loop(1);
+  looping = true;
+  } //End Loop Once
+  if ( key=='I' || key=='i') { //Loop Infinite Times
+  playList[currentSong].loop();
+  looping = true;
+  } //End Loop Infinite Times
+  if ( key=='S' || key=='s') { //STOP BUTTON
+   playList[currentSong].pause();
+   playList[currentSong].rewind();
+  } // End STOP BUTTON
+  
 } //End keyPressed
 //
 void mousePressed() {
