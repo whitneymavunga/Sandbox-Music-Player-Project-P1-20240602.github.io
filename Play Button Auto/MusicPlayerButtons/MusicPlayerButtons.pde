@@ -8,8 +8,8 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim; //creates object to access all functions
-int numberSoundEffects = 4; //DEV Verify, OS able to count (CS20 Solution)
-int numberMusicSongs = 8; //DEV Verify, OS able to count (CS20 Solution)
+int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
+int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
 AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 int currentSong = 0; //JAVA starts at 0, no for all languages
@@ -29,20 +29,22 @@ void setup () {
   println(displayInstructions);
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  String pathwaySoundEffects = "../Audio/SoundEffect/"; //Relative Path
-  String pathwayMusic = "../../audio/My Music/";
+  String pathwaySoundEffects = "../../audio/soundEffect/"; //Relative Path
+  String pathwayMusic = "../Audio/MyMusic/"; //Relative Path
   String quitButtonSound = "CarDoorClosing";
-  String solitudedark = "solitudedark";
+  String forestlullaby = "forestlullaby";
   String extension = ".mp3";
   //println ( pathwaySoundEffects+quitButtonSound+extension );
-  println ("Relative Pathway", pathwayMusic+solitudedark+extension );
+  //println ( "Relative Pathway:", pathwayMusic+forest+extension );
   String pathQuitButtonSound = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
-  String pathsolitudedark = sketchPath( pathwaySoundEffects + solitudedark + extension ); //Absolute Path
-  println ( "Absolute Pathway", pathsolitudedark ); //pathQuitButtonSound
-  //soundEffects[0] = minim.loadFile [pathQuitButtonSound];
-  //playList[0] = minim.loadFile [ "pathsolitudedark" ]; //"" is compiler error
+  String pathForestSong = sketchPath( pathwayMusic + forestlullaby + extension ); //Absolute Path
+  //println ( "Absolute Pathway:", pathForestSong ); //pathQuitButtonSound
+  soundEffects[0] = minim.loadFile( pathQuitButtonSound );
+  playList[0] =  minim.loadFile( pathForestSong ); // "" is compiler error
   //
-  //playList1.loop(0);
+  //Note: Music starts before CANVAS ... Purpose of Player
+  //Note: See Easter Egg about Time-On and Looping Songs
+  //playList[currentSong].loop(0); //Testing Only
   //
 } //End Setup
 //
@@ -55,10 +57,11 @@ void draw() {
   /*Note: For Loop Feature
    Easter Egg: program time for number of song loops
    Alternate to timer for music player, times to the end of a song
-   */
+   
    if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()!=-1 ) println("There are", playList[currentSong].loopCount(), "loops left.");
    if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()==-1 ) println("Looping Infinitely");
    println("KeyBoard Looping question")
+   */
   //
   if ( !playList[currentSong].isPlaying() ) println( "Nothing is playing, Pick a Song" );
   if ( playList[currentSong].isPlaying() && !playList[currentSong].isLooping() ) println("Play Once");
@@ -70,12 +73,12 @@ void draw() {
    */
   if ( playList[currentSong].isPlaying() ) {
     //Empty IF is FALSE
-  } else if ( playList[currentSong].length() < 180000 ) { //PAIN Minutes is 3, 180s, 180,000ms
-    //TRUE: if song is less than 3 minutes, STOP, I want to hear it from the beginning
+  } else if ( playList[currentSong].length() < 60000 ) { //PAIN Minutes is 1, 60s, 60,000ms
+    //TRUE: if song is less than 1 minutes, STOP, I want to hear it from the beginning
     //Pause is actually STOP
     playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
-  } else if ( !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.75 ) ) { //Calc PAIN #
-    //TRUE: if 75% played, we need a STOP & Rewind Button
+  } else if ( !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.50 ) ) { //Calc PAIN #
+    //TRUE: if 50% played, we need a STOP & Rewind Button
     playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
     //
     /* Future coding
