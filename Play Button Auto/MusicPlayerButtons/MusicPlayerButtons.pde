@@ -10,7 +10,7 @@ import ddf.minim.ugens.*;
 Minim minim; //creates object to access all functions
 int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
 int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
-AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+AudioPlayer[] playList = new AudioPlayer[1]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 int currentSong = 0; //JAVA starts at 0, no for all languages
 //
@@ -29,27 +29,25 @@ void setup () {
   println(displayInstructions);
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  String pathwaySoundEffects = "../../audio/soundEffect/"; //Relative Path
-  String pathwayMusic = "../Audio/MyMusic/"; //Relative Path
+  String pathwaysoundEffects = "../../audio/soundEffects/"; //Relative Path
+  String pathwayMyMusic = "../../audio/MyMusic/"; //Relative Path
   String quitButtonSound = "CarDoorClosing";
   String forestlullaby = "forestlullaby";
   String extension = ".mp3";
-  //println ( pathwaySoundEffects+quitButtonSound+extension );
-  //println ( "Relative Pathway:", pathwayMusic+forest+extension );
-  String pathQuitButtonSound = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
-  String pathForestSong = sketchPath( pathwayMusic + forestlullaby + extension ); //Absolute Path
-  //println ( "Absolute Pathway:", pathForestSong ); //pathQuitButtonSound
-  soundEffects[0] = minim.loadFile( pathQuitButtonSound );
-  playList[0] =  minim.loadFile( pathForestSong ); // "" is compiler error
+  //println ( pathwaysoundEffects+quitButtonSound+extension );
+  //println ( "Relative Pathway:", pathwayMusic+forestlullaby+extension );
+  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
+  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension ); //Absolute Path
+  //println ( "Absolute Pathway:", pathGrooveSong ); //pathQuitButtonSound
+  soundEffects = minim.loadFile ( pathQuitButtonSound );
+  playList =  minim.loadFile ( pathforestlullabySong ); // "" is compiler error
   //
-  //Note: Music starts before CANVAS ... Purpose of Player
-  //Note: See Easter Egg about Time-On and Looping Songs
-  //playList[currentSong].loop(0); //Testing Only
+  //playList[0].loop(0); //Testing Only
   //
 } //End Setup
 //
 void draw() {
-  println( "Song Position", playList[currentSong].position(), "Song Length", playList[currentSong].length() );
+  println( "Song Position", playList[0].position(), "Song Length", playList[0].length() );
   //
   //ERROR: only plays beginning of song before starting again
   //playList[currentSong].loop(0);
