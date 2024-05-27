@@ -10,8 +10,8 @@ import ddf.minim.ugens.*;
 Minim minim; //creates object to access all functions
 int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
 int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
-AudioPlayer[] playList = new AudioPlayer[1]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
-AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
+AudioPlayer [] playList = new AudioPlayer[1]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+AudioPlayer [] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 int currentSong = 0; //JAVA starts at 0, no for all languages
 //
 int appWidth, appHeight;
@@ -39,8 +39,8 @@ void setup () {
   String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
   String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension ); //Absolute Path
   //println ( "Absolute Pathway:", pathGrooveSong ); //pathQuitButtonSound
-  soundEffects = minim.loadFile ( pathQuitButtonSound );
-  playList =  minim.loadFile ( pathforestlullabySong ); // "" is compiler error
+  soundEffects = minim.loadFile( pathQuitButtonSound );
+  playList =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
   //
   //playList[0].loop(0); //Testing Only
   //
@@ -115,7 +115,14 @@ void keyPressed() {
    playList[currentSong].pause();
    playList[currentSong].rewind();
   } // End STOP BUTTON
-  
+  if ( key=='M' || key=='m' ){
+    if ( playList[currentSong].isMuted() ) {
+      playList[currentSong].unmute();
+    }else{
+     playList[currentSong].mute();
+    }
+  }
+  //
 } //End keyPressed
 //
 void mousePressed() {
