@@ -8,10 +8,20 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim; //creates object to access all functions
-AudioPlayer playList1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
-AudioPlayer soundEffects1; //"Play List" for Sound Effects
+int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
+int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
+AudioPlayer playList1 = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+AudioPlayer soundEffects1 = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
+AudioMetaData[] playListMetaData;
 //
 int appWidth, appHeight;
+//
+Boolean looping=false;
+//
+String testingOnly = "1";
+PFont generalFont;
+//
+color black = #000000, white=#FFFFFF, nightInk=#FFFF00;
 //
 void setup() {
   //Display
@@ -22,6 +32,9 @@ void setup() {
   //Landscape is HARDCODED
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bru, turn your phun";
   //println(displayInstructions);
+  //
+  //Font Code
+  generalFont = createFont( "GeorgiaBoldItalic", appHeight );
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
   String pathwaysoundEffects = "../../audio/soundEffects/"; //Relative Path
@@ -34,8 +47,9 @@ void setup() {
   String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
   String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension ); //Absolute Path
   //println ( "Absolute Pathway:", pathGrooveSong ); //pathQuitButtonSound
-  soundEffects1 = minim.loadFile( pathQuitButtonSound );
-  playList1 =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
+  soundEffects [0] = minim.loadFile( pathQuitButtonSound );
+  playList [0] =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
+  playListMetaData [0] = playList[0].getMetaData();
   //
   //playList1.loop(0); //Testing Only
   //
@@ -59,6 +73,17 @@ void draw() {
      */
   } else {
   }
+  //
+  //Printing text to the console or CANVAS
+  fill(black);
+  rect(width*1/4, height*0, width*1/2, height*1/10);
+  fill(white);
+  textAlign (CENTER,CENTER);
+  int size = 30;
+  textFont(generalFont, size);
+  println("String Variable is:", playListMetaData[0]);
+  //text(songMetaData.title(), width*1/4, height*0, width*1/2, height*1/10);
+  fill(255);
 } //End draw
 //
 void keyPressed(){
@@ -89,10 +114,11 @@ void keyPressed(){
     }
   //END MUTE
   //
-}//End keyPressed
+}
+  //End keyPressed
 //
 void mousePressed() {
-}
-//End mousPressed
+} //End mousePressed
 //
 //End MAIN Program
+//
