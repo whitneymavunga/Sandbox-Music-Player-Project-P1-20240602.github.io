@@ -10,15 +10,16 @@ import ddf.minim.ugens.*;
 Minim minim; //creates object to access all functions
 int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
 int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
-AudioPlayer playList1 = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
-AudioPlayer soundEffects1 = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
-AudioMetaData[] playListMetaData;
+AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
+AudioMetaData[] playListMetaData = new AudioMetaData [ numberMusicSongs ];
+int currentSong = 0;
 //
 int appWidth, appHeight;
 //
 Boolean looping=false;
 //
-String testingOnly = "1";
+String testingOnly = "Forest Lullaby";
 PFont generalFont;
 //
 color black = #000000, white=#FFFFFF, nightInk=#FFFF00;
@@ -56,34 +57,54 @@ void setup() {
 } //End setup
 //
 void draw() {
-  println( "Song Position", playList1.position(), "Song Length", playList1.length() );
-  playList1.loop(0); //ERROR: only plays beginning of song before starting again
-   if ( playList[currentSong].isPlaying() ) {
-  } else if ( playList[currentSong].length() < 12000 ) { //PAIN Minutes is 1, 60s, 60,000ms
-    //TRUE: if song is less than 1 minutes, STOP, I want to hear it from the beginning
-    //Pause is actually STOP
+  //Instrpection of Booleans and Associated Varaiables
+  println( "Song Position", playList[currentSong].position(), "Song Length", playList[currentSong].length() );
+  if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()!=-1 ) println("There are", playList[currentSong].loopCount(), "loops left.");
+  if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()==-1 ) println("Looping Infinitely");
+  //println("Keyboard Looping Question", looping);
+  if ( !playList[currentSong].isPlaying() ) println( "Nothing is playing, Pick a Song" );
+  if ( playList[currentSong].isPlaying() && !playList[currentSong].isLooping() ) println("Play Once");
+  //
+  /* Auto Play Code for Future Use
+   Contains instructions from Key Board Short Cuts
+   Note: PAIN Thresholds, 3 minutes & 75%, can be variables
+   Note: Variables can be set in a Menu Button
+   */
+  if ( playList[currentSong].isPlaying() ) {
+    if ( !playList[currentSong].isLooping() && looping==true) looping=false; //Protect .loop() from .rewind() as STOP Loop
+  } else if ( looping == false && !playList[currentSong].isPlaying() && playList[currentSong].length() < 60000 ) { //PAIN Minutes is 1 minute, 60, 60,000ms
+    //TRUE: if song is less than 1 minute, STOP, I want to hear it from the beginning
+    //.pause() in keyPressed() {} is actually STOP
     playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
-  } else if ( !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.50 ) ) { //Calc PAIN #
-    //TRUE: if 50% played, we need a STOP & Rewind Button
+  } else if ( looping == false && !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.75 ) ) { //Calc PAIN # as % of Song
+    //TRUE: if 75% played, we need a STOP & Rewind Button
+    //.pause() in keyPressed() {} is actually STOP
     playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
-    //
+  } else {
     /* Future coding
      currentSong = currentSong + 1; //currentSong++; currentSong+=1
      playList[currentSong].play();
      */
-  } else {
   }
+  /* Previous IF-Else
+   if ( playList[currentSong].isPlaying() ) {
+   //Empty IF, TRUE
+   } else {
+   playList[currentSong].rewind(); //CAUTION: !.isPlaying() & .rewind() = STOP
+   }
+   */
+   //Printing Text to Console | CANVAS
+  fill(black); //Note: background for rect()
+  rect(width*1/4, height*0, width*1/2, height*1/10); //Text DIV
+  fill(white); //Ink
+  textAlign (CENTER, CENTER); //Align X&Y, see Processing.org / Reference
+  //Values: [LEFT | CENTER | RIGHT] & [TOP | CENTER | BOTTOM | BASELINE]
+  int size = 25; //Change the number until it fits, largest font size
+  textFont(generalFont, size); //CAUTION: SIZE is hardcoded, needs to be changed manually
+  println("String Variable is:", testingOnly);
+  text(testingOnly, width*1/4, height*0, width*1/2, height*1/10);
+  fill(255); //Reset to white for rest of the program
   //
-  //Printing text to the console or CANVAS
-  fill(black);
-  rect(width*1/4, height*0, width*1/2, height*1/10);
-  fill(white);
-  textAlign (CENTER,CENTER);
-  int size = 30;
-  textFont(generalFont, size);
-  println("String Variable is:", playListMetaData[0]);
-  //text(songMetaData.title(), width*1/4, height*0, width*1/2, height*1/10);
-  fill(255);
 } //End draw
 //
 void keyPressed(){
@@ -112,12 +133,12 @@ void keyPressed(){
     }else{
      playList[currentSong].mute();
     }
-  //END MUTE
+  }//END MUTE
   //
-}
-  //End keyPressed
+
+}//End keyPressed
 //
-void mousePressed() {
+void mousePressed(){
 } //End mousePressed
 //
 //End MAIN Program

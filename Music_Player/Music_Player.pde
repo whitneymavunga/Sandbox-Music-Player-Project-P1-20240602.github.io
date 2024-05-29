@@ -15,16 +15,8 @@ AudioPlayer playList1; //creates "Play List" variable holding extensions WAV, AI
 //
 int appWidth, appHeight;
 //
-int size;
-PFont generalFont;
-String quit="QUIT";
-//
-color white=255, yellow=#FFFF00, black=0, red=#FF0000, purple=#A020F0; //Hexadecimal, see Tools/ Colour Selector
 Boolean dayMode=false;
 Boolean lightMode=false;
-//
-color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, note much smaller than colour
-color foregroundColour;
 //
 String pathDarkBackgroundImage, pathLightBackgroundImage; 
 PImage haumea, shinra, starslogo;
