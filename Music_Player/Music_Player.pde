@@ -134,7 +134,7 @@ void setup() {
     backgroundImage = loadImage( pathDarkBackgroundImage );
   } else {
     backgroundColour = darkBackground;
-    foregroundColour = yellow; //Note: if(hour()<9&&hour()>17)
+    foregroundColour = orange; //Note: if(hour()<9&&hour()>17)
     backgroundImage = loadImage( pathDarkBackgroundImage );
   }
   //
@@ -158,13 +158,13 @@ void draw() {
   //Quit Button
   //fill(purple);
   //if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) fill(yellow);
-   fill(purple);
+   fill(violet);
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   if ( mouseX>quitButtonX && mouseX<quitButtonX+quitButtonWidth && mouseY>quitButtonY && mouseY<quitButtonY+quitButtonHeight ) {
-    fill(yellow);
+    fill(orange);
     rect( quitButtonX+quitButtonWidth*1/7, quitButtonY+quitButtonHeight*1/7, quitButtonWidth*5/7, quitButtonHeight*5/7);
   } else {
-    fill(purple);
+    fill(violet);
   }
   fill(foregroundColour); //Resetting the Defaults
   //Quit, Text
