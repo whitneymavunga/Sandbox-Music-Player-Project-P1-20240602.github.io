@@ -6,3 +6,9 @@ CS10 Lessons about Music Player Promotion
 -[x] item done
 -[ ] <del> i do not want to do this
 -[ ]
+//
+# Case Study
+QuitButton text static [done]
+QuitButton sound [done]
+MusicPlayerButtons [Inprogress]
+
