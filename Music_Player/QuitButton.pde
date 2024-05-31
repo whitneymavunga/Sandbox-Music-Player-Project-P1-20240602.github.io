@@ -1,5 +1,4 @@
 //Global Variables
-float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 //
 int size;
 PFont generalFont, quitButtonFont;

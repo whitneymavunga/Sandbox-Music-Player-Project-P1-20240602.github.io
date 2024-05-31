@@ -1,6 +1,7 @@
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 float StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight;
 float playButtonX, playButtonY, playButtonWidth, playButtonHeight;
+float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 float RadioX, RadioY, RadioWidth, RadioHeight;
 float LibraryX, LibraryY, LibraryWidth, LibraryHeight;
 float SearchX, SearchY, SearchWidth, SearchHeight;

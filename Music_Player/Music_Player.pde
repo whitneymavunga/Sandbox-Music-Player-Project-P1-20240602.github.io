@@ -86,8 +86,8 @@ void setup() {
   String portrait = "Portrait/";
   String landscape_Square = "Landscape & Square Images/";
   String backgroundFileName = "Background Image/";
-  pathDarkBackgroundImage = pathway + portrait + haumea + extensionJPG;
-  pathLightBackgroundImage = pathway + landscape_Square + shinra + extensionJPEG;
+  String pathDarkBackgroundImage = pathway + portrait + haumea + extensionJPG;
+  String pathLightBackgroundImage = pathway + landscape_Square + shinra + extensionJPEG;
   String StarTunesImagePath = pathway + portrait + starslogo + extensionJPG;
   StarTunesImage = loadImage(StarTunesImagePath );
   //

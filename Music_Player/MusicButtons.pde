@@ -5,7 +5,7 @@ int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
 AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 AudioMetaData[] playListMetaData = new AudioMetaData [ numberMusicSongs ];
-int currentSong = 0;
+int currentSong = numberMusicSongs - numberMusicSongs;
 //
 //int appWidth, appHeight;
 //
@@ -34,15 +34,25 @@ void musicButtons() {
   String pathwayMyMusic = "../../audio/MyMusic/"; //Relative Path
   String quitButtonSound = "CarDoorClosing";
   String forestlullaby = "forestlullaby";
+  String commas = "Ayra_Starr_Commas";
+  String MASC = "Doja_Cat_MASC";
+  String drivebreakbeat = "drivebreakbeat";
+  String me&u = "Tems_Me_U";
+  String solitudedark = "solitudedark";
   String extension = ".mp3";
   //println ( pathwaysoundEffects+quitButtonSound+extension );
   //println ( "Relative Pathway:", pathwayMusic+forestlullaby+extension );
-  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
-  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension ); //Absolute Path
-  //println ( "Absolute Pathway:", pathGrooveSong ); //pathQuitButtonSound
+  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension );//Absolute Pathway 
+  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension );//Absolute Pathway
+  String pathcommasSong = sketchPath( pathwayMyMusic + commas + extension );//Absolute Pathway
+  String pathMASCSong = sketchPath( pathwayMyMusic + MASC + extension );//Absolute Pathway
+  String pathdrivebreakbeatSong = sketchPath( pathwayMyMusic + drivebreakbeat + extension );//Absolute Pathway
+  String pathme&uSong = sketchPath( pathwayMyMusic + me&u + extension );//Absolute Pathway
+  String pathsolitudedarkSong = sketchPath( pathwayMyMusic + solitudedark + extension );//Absolute Pathway
+  println ("Absolute Pathway:", pathsolitudedarkSong ); //pathQuitButtonSound
   soundEffects [0] = minim.loadFile( pathQuitButtonSound );
-  playList [0] =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
-  playListMetaData [0] = playList[0].getMetaData();
+  //playList [0] =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
+  //playListMetaData [0] = playList[0].getMetaData();
   //
   //playList1.loop(0); //Testing Only
   //
