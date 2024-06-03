@@ -1,5 +1,5 @@
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
-float StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight;
+float StarTunesCoverX, StarTunesCoverY, StarTunesCoverWidth, StarTunesCoverHeight;
 float playButtonX, playButtonY, playButtonWidth, playButtonHeight;
 float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 float RadioX, RadioY, RadioWidth, RadioHeight;
@@ -18,10 +18,10 @@ void population() {
   backgroundY = appHeight*0;
   backgroundWidth = appWidth-1;
   backgroundHeight = appHeight-1;
-  StarTunesX = appWidth*18/100; //Percents example
-  StarTunesY = appHeight*15/100;
-  StarTunesWidth = appWidth*64/100;
-  StarTunesHeight = appHeight*6/16; // Fraction Example
+  StarTunesCoverX = appWidth*18/100; //Percents example
+  StarTunesCoverY = appHeight*15/100;
+  StarTunesCoverWidth = appWidth*64/100;
+  StarTunesCoverHeight = appHeight*6/16; // Fraction Example
   playButtonX = appWidth*3.45/10;
   playButtonY = appHeight*7/10;
   playButtonWidth = appWidth*3/10;

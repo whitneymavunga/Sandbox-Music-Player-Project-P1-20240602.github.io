@@ -1,22 +1,30 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+// Minim Library
+//
 //Global Variables
-//Minim minim; //creates object to access all functions
+Minim minim; //creates object to access all functions
 int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
 int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
 AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 AudioMetaData[] playListMetaData = new AudioMetaData [ numberMusicSongs ];
-int currentSong = numberMusicSongs - numberMusicSongs;
+int currentSong = 0;
 //
-//int appWidth, appHeight;
+int appWidth, appHeight;
 //
 Boolean looping=false;
 //
 String testingOnly = "Forest Lullaby";
-//PFont generalFont;
+PFont generalFont;
 //
-//color black = #000000, white=#FFFFFF, nightInk=#FFFF00;
+color black = #000000, white=#FFFFFF, nightInk=#FFFF00;
 //
-void musicButtons() {
+void setup() {
   //Display
   size(600, 400); //width, height //400, 500
   //fullScreen(); //displayWidth, displayHeight
@@ -34,61 +42,21 @@ void musicButtons() {
   String pathwayMyMusic = "../../audio/MyMusic/"; //Relative Path
   String quitButtonSound = "CarDoorClosing";
   String forestlullaby = "forestlullaby";
-  String commas = "AyraStarrCommas";
-  String MASC = "DojaCatMASC";
-  String drivebreakbeat = "drivebreakbeat";
-  String Tems = "TemsMeU";
-  String solitudedark = "solitudedark";
   String extension = ".mp3";
   //println ( pathwaysoundEffects+quitButtonSound+extension );
   //println ( "Relative Pathway:", pathwayMusic+forestlullaby+extension );
-  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension );//Absolute Pathway 
-  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension );//Absolute Pathway
-  String pathcommasSong = sketchPath( pathwayMyMusic + commas + extension );//Absolute Pathway
-  String pathMASCSong = sketchPath( pathwayMyMusic + MASC + extension );//Absolute Pathway
-  String pathdrivebreakbeatSong = sketchPath( pathwayMyMusic + drivebreakbeat + extension );//Absolute Pathway
-  String pathTemsSong = sketchPath( pathwayMyMusic + Tems + extension );//Absolute Pathway
-  String pathsolitudedarkSong = sketchPath( pathwayMyMusic + solitudedark + extension );//Absolute Pathway
-  println ("Absolute Pathway:", pathsolitudedarkSong ); //pathQuitButtonSound
-  //println ( "Sound Effect Absolute Pathway:", pathQuitButtonSound );
-  //println ( "1. Absolute Pathway:", pathforestlullabySong );
-  //println ( "2. Absolute Pathway:", pathcommasSong );
-  //println ( "3. Absolute Pathway:", pathMASCSong );
-  //println ( "4. Absolute Pathway:", pathdrivebreakbeatSong );
-  //println ( "5. Absolute Pathway:", pathTemsSong );
-  //println ( "6. Absolute Pathway:", pathsolitudedarkSong );
+  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension ); //Absolute Path
+  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension ); //Absolute Path
+  //println ( "Absolute Pathway:", pathGrooveSong ); //pathQuitButtonSound
   soundEffects [0] = minim.loadFile( pathQuitButtonSound );
-   //Note: currentSong, currentSong+=1, currentSong++
-  println( "The current song is:", currentSong );
-  //
   playList [0] =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
-   println( "1. The current song is:", currentSong, pathforestlullabySong );
-  //playList[1] =  minim.loadFile( pathcommasSong ); // "" is compiler error
-  //println( "2. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathMASCSong ); // "" is compiler error
-  //println( "3. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathdrivebreakbeatSong ); // "" is compiler error
-  //println( "4. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathTemsSong ); // "" is compiler error
-  //println( "5. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathsolitudedarkSong ); // "" is compiler error
-  //println( "6. The current song is:", currentSong );
- //
-  //Random Start Prototype
-  //println( "Current Song, Random Number:", int ( random(0, 6) ) );
-  //
-  //Note: Music starts before CANVAS ... Purpose of Player
-  //Note: See Easter Egg about Time-On and Looping Songs
-  playList[0].loop(); //Testing Only, change parameter to the accruate number
-  //
-  //playListMetaData [0] = playList[0].getMetaData();
+  playListMetaData [0] = playList[0].getMetaData();
   //
   //playList1.loop(0); //Testing Only
   //
 } //End setup
 //
-void playlist() {
-  /*
+void draw() {
   //Instrpection of Booleans and Associated Varaiables
   println( "Song Position", playList[currentSong].position(), "Song Length", playList[currentSong].length() );
   if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()!=-1 ) println("There are", playList[currentSong].loopCount(), "loops left.");
@@ -101,7 +69,7 @@ void playlist() {
    Contains instructions from Key Board Short Cuts
    Note: PAIN Thresholds, 3 minutes & 75%, can be variables
    Note: Variables can be set in a Menu Button
-   
+   */
   if ( playList[currentSong].isPlaying() ) {
     if ( !playList[currentSong].isLooping() && looping==true) looping=false; //Protect .loop() from .rewind() as STOP Loop
   } else if ( looping == false && !playList[currentSong].isPlaying() && playList[currentSong].length() < 60000 ) { //PAIN Minutes is 1 minute, 60, 60,000ms
@@ -124,7 +92,7 @@ void playlist() {
    } else {
    playList[currentSong].rewind(); //CAUTION: !.isPlaying() & .rewind() = STOP
    }
-   
+   */
    //Printing Text to Console | CANVAS
   fill(black); //Note: background for rect()
   rect(width*1/4, height*0, width*1/2, height*1/10); //Text DIV
@@ -137,10 +105,9 @@ void playlist() {
   text(testingOnly, width*1/4, height*0, width*1/2, height*1/10);
   fill(255); //Reset to white for rest of the program
   //
-  */
-//} //End draw
+} //End draw
 //
-void buttons(){
+void keyPressed(){
  if ( key=='P' || key=='p' ) { 
     if ( playList[currentSong].isPlaying() ) { 
       playList[currentSong].pause(); 
@@ -168,12 +135,10 @@ void buttons(){
     }
   }//END MUTE
   //
-  if (key=='A' || key=='a') currentSong = int (random(0, 6) );
-  //
-  //
+
 }//End keyPressed
 //
-void mousepressed(){
+void mousePressed(){
 } //End mousePressed
 //
 //End MAIN Program

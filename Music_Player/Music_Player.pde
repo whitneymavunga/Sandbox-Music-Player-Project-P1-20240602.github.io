@@ -16,7 +16,7 @@ AudioPlayer playList1; //creates "Play List" variable holding extensions WAV, AI
 int appWidth, appHeight;
 //
 Boolean dayMode=false;
-Boolean lightMode=false;
+Boolean nightMode=false;
 //
 String pathDarkBackgroundImage, pathLightBackgroundImage; 
 PImage haumea, shinra, starslogo;
@@ -76,13 +76,14 @@ void setup() {
    */
   //
   //Variable Population
-  //Images
+  //Image
+  /*
   String shinra = "fire-force-season-1-cour-2-1190407-1280x0-1-800x449";
   String haumea = "haumea___fire_force__minimalist_wallpaper__by_nquitcoph_deaprdr-414w-2x";
   String starslogo = "Stars-Logo-Graphics-1-3-580x386";
   String extensionJPG = ".jpg";
   String extensionJPEG = ".jpeg";
-  String pathway = "../../Images/";
+  String pathway = "../mystuff/Images/";
   String portrait = "Portrait/";
   String landscape_Square = "Landscape & Square Images/";
   String backgroundFileName = "Background Image/";
@@ -106,29 +107,29 @@ void setup() {
       //NOTE: ratios like percent are not linear decreases in both directions
     }
   }
-  StarTunesWidthAdjusted = largerStarTunesDimension;
-  StarTunesHeightAdjusted = smallerStarTunesDimension;
+  //StarTunesWidthAdjusted = largerStarTunesDimension;
+  //StarTunesHeightAdjusted = smallerStarTunesDimension;
   //
   /*Image can be centered, left justified, or right justified on the larger dimension
    LEFT: X-value of image same as rect()
    CENTERED: X-value of image = albumCoverX + (albumCoverWidth-albumCoverWidthAdjusted)/2;
    RIGHT: X-value of image = albumCoverX+albumCoverWidth-albumCoverWidthAdjusted;
-   */
+   
   StarTunesRIGHT = StarTunesX;
   StarTunesCENTERED = StarTunesX + (StarTunesWidth-StarTunesWidthAdjusted)/2;
   StarTunesLEFT =X+StarTunesWidth-StarTunesWidthAdjusted;
-  //
+  */
   //
   //Time Calculations
   //if ( hour()>=9 && hour()<=17 ) backgroundColour = whiteBackground;
   //if ( hour()<9 && hour()>17 ) backgroundColour = darkBackground;
   if ( hour()>=9 && hour()<=17 ) dayMode=true; //Day & Night Mode Clock Choice
   println();
-  if ( dayMode==true && lightMode==true ) { //Light & Dark Modes
+  if ( dayMode==true && nightMode==true ) { //Light & Dark Modes
     backgroundColour = whiteBackground;
     foregroundColour = black;
     backgroundImage = loadImage( pathLightBackgroundImage ); //Changing this Variable with 3 different images
-  } else if ( lightMode==false ) {
+  } else if ( nightMode==false ) {
     backgroundColour = black;
     foregroundColour = whiteBackground;
     backgroundImage = loadImage( pathDarkBackgroundImage );
@@ -144,16 +145,16 @@ void setup() {
 void draw() {
     //Display
   // background(backgroundColour); //Hardcoded Backgorund Colour Out, use IF to change
-  if ( dayMode=true && lightMode == true ) { //Boolean keyBind, Logical Shortcut
+  if ( dayMode=true && nightMode == true ) { //Boolean keyBind, Logical Shortcut
     //CAUTION: See setup
-    backgroundImage = loadImage( pathLightBackgroundImage );
-  } else if ( lightMode == false ) {
-    backgroundImage = loadImage( pathDarkBackgroundImage );
+    //backgroundImage = loadImage( pathLightBackgroundImage );
+  //} else if ( lightMode == false ) {
+   backgroundImage = loadImage( pathDarkBackgroundImage );
   } else {
     tint(255, 255, 255, 0); //no blue;
   }
   image( backgroundImage, backgroundX, backgroundY, backgroundWidth, backgroundHeight);
-  //fill(foregroundColour);
+  fill(foregroundColour);
   //
   //Quit Button
   //fill(purple);
@@ -199,10 +200,10 @@ void keyPressed() { //Listener
 
   //CAUTION, must return to "Request White, Light Mode"
   if ( key=='W' || key=='w' ) { //Day Mode, White Light Containing Blue Colour
-    if (  lightMode == false ) {
-      lightMode = true;  //Light Mode ON
+    if (  nightMode == false ) {
+      nightMode = true;  //Light Mode ON
     } else {
-      lightMode = false; //Dark Mode ON, no darkMode Boolean required
+      nightMode = false; //Dark Mode ON, no darkMode Boolean required
     }
   } //End Day Mode
    //
