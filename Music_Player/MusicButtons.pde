@@ -168,10 +168,16 @@ void buttons(){
     }
   }//END MUTE
   //
-  if (key=='A' || key=='a') currentSong = int (random(0, 6) );
+  if ( key=='A' || key=='a') { //Randomly Pick another song in the Play List
+    currentSong = int ( random( numberMusicSongs-numberMusicSongs, numberMusicSongs ) );
+    println( "Current Song, Random Number:", currentSong );
+    playList.pause(); //Note: computer plays harddrive file,
+    playList.rewind(); //     mulitple files will play at the same time
+    playList =  minim.loadFile( filePathNameMusic[currentSong] );
+    playList.play();
   //
   //
-}//End keyPressed
+} //End keyPressed
 //
 void mousepressed(){
 } //End mousePressed

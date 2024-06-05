@@ -179,7 +179,7 @@ void draw() {
   //
   //
   //StarTunes Cover Image
-  image( StarTunesImage, StarTunesCENTERED, StarTunesY, StarTunesWidthAdjusted, StarTunesHeightAdjusted );
+  image( StarTunesImage, StarTunesCENTERED, StarTunesCoverY, StarTunesWidthAdjusted, StarTunesHeightAdjusted );
   //
   //println(mouseX, mouseY);
   //

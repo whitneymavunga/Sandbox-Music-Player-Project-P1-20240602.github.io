@@ -49,13 +49,13 @@ void ratio() {
 } //End setup
 //
 void aspect() {
-  image( albumCoverImage, albumCoverX, albumCoverY, albumCoverWidthAdjusted, albumCoverHeightAdjusted );
+  image( StarTunesImage, StarTunesCENTERED, StarTunesCoverY, StarTunesWidthAdjusted, StarTunesHeightAdjusted );
 } //End draw
 //
-void mousePressed() {
+void mousePress() {
 } //End mousePressed
 //
-void keyPressed() {
+void keyPress() {
 } //End keyPressed
 //
 //End MAIN Program
