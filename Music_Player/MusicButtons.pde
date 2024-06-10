@@ -1,7 +1,7 @@
 //Global Variables
 //Minim minim; //creates object to access all functions
-int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
-int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
+int numberSoundEffects = 4; //DEV Verify, OS able to count (CS20 Solution)
+int numberMusicSongs = 11; //DEV Verify, OS able to count (CS20 Solution)
 AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
 AudioMetaData[] playListMetaData = new AudioMetaData [ numberMusicSongs ];
