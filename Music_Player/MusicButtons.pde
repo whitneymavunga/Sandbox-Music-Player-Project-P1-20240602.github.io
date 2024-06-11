@@ -39,6 +39,11 @@ void musicButtons() {
   String drivebreakbeat = "drivebreakbeat";
   String Tems = "TemsMeU";
   String solitudedark = "solitudedark";
+  String  duvet = "BôaDuvet";
+  String lana = "SummertimeSadness";
+  String  pinkpantheress= "Pain";
+  String pink = "JustForMe";
+  String Rihanna = "TakeABow";
   String extension = ".mp3";
   //println ( pathwaysoundEffects+quitButtonSound+extension );
   //println ( "Relative Pathway:", pathwayMusic+forestlullaby+extension );
@@ -49,7 +54,12 @@ void musicButtons() {
   String pathdrivebreakbeatSong = sketchPath( pathwayMyMusic + drivebreakbeat + extension );//Absolute Pathway
   String pathTemsSong = sketchPath( pathwayMyMusic + Tems + extension );//Absolute Pathway
   String pathsolitudedarkSong = sketchPath( pathwayMyMusic + solitudedark + extension );//Absolute Pathway
-  println ("Absolute Pathway:", pathsolitudedarkSong ); //pathQuitButtonSound
+  String pathduvetSong = sketchPath( pathwayMyMusic + BôaDuvet + extension );//Absolute Pathway
+  String pathlanaSong = sketchPath( pathwayMyMusic + SummertimeSadness + extension );//Absolute Pathway
+  String pathpinkpantheressSong = sketchPath( pathwayMyMusic + Pain + extension );//Absolute Pathway
+  String pathpinkSong = sketchPath( pathwayMyMusic + JustForMe + extension );//Absolute Pathway
+  String pathRihannaSong = sketchPath( pathwayMyMusic + TakeABow + extension );//Absolute Pathway
+  println ("Absolute Pathway:", pathRihannaSong ); //pathQuitButtonSound
   //println ( "Sound Effect Absolute Pathway:", pathQuitButtonSound );
   //println ( "1. Absolute Pathway:", pathforestlullabySong );
   //println ( "2. Absolute Pathway:", pathcommasSong );

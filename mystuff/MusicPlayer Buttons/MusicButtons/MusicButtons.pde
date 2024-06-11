@@ -8,23 +8,20 @@ import ddf.minim.ugens.*;
 //
 //Global Variables
 Minim minim; //creates object to access all functions
-int numberSoundEffects = 1; //DEV Verify, OS able to count (CS20 Solution)
-int numberMusicSongs = 6; //DEV Verify, OS able to count (CS20 Solution)
-AudioPlayer[] playList = new AudioPlayer[ numberMusicSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
-AudioPlayer[] soundEffects = new AudioPlayer[ numberSoundEffects ]; //"Play List" for Sound Effects
-AudioMetaData[] playListMetaData = new AudioMetaData [ numberMusicSongs ];
-int currentSong = numberMusicSongs - numberMusicSongs;
+int numberSoundEffects = 4; //DEV Verify, OS able to count (CS20 Solution)
+int numberMusicSongs = 11; //DEV Verify, OS able to count (CS20 Solution)
+String[] filePathNameMusic = new String[numberMusicSongs];
+String[] filePathNameSoundEffect = new String[numberSoundEffects];
+AudioPlayer playList; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+AudioPlayer soundEffects; //"Play List" for Sound Effects
+int currentSong = numberMusicSongs - numberMusicSongs; //JAVA starts counting at 0, not for all languages
+int skip = 5000; //Default Preference, see draw() | keyPressed()
 //
 int appWidth, appHeight;
 //
 Boolean looping=false;
 //
-String testingOnly = "Forest Lullaby";
-PFont generalFont;
-//
-//color black = #000000, white=#FFFFFF, nightInk=#FFFF00;
-//
-void musicButtons() {
+void setup() {
   //Display
   size(600, 400); //width, height //400, 500
   //fullScreen(); //displayWidth, displayHeight
@@ -34,121 +31,92 @@ void musicButtons() {
   String displayInstructions = ( appWidth >= appHeight ) ? "Good To Go" : "Bru, turn your phun";
   //println(displayInstructions);
   //
-  //Font Code
-  generalFont = createFont( "GeorgiaBoldItalic", appHeight );
-  //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  String pathwaysoundEffects = "../../audio/soundEffects/"; //Relative Path
+  String pathwaySoundEffects = "../../audio/soundEffects/"; //Relative Path
   String pathwayMyMusic = "../../audio/MyMusic/"; //Relative Path
-  String quitButtonSound = "CarDoorClosing";
-  String forestlullaby = "forestlullaby";
+  String quitButtonSound = "Suspense";
+  String duvet = "BôaDuvet";
   String commas = "AyraStarrCommas";
   String MASC = "DojaCatMASC";
-  String drivebreakbeat = "drivebreakbeat";
+  String drive = "drivebreakbeat";
+  String forest = "forestlullaby";
+  String pink = "JustForMe";
+  String pantheress = "Pain";
+  String solitude = "solitudedark";
+  String summer = "SummertimeSadness";
+  String Rihanna = "TakeABow";
   String Tems = "TemsMeU";
-  String solitudedark = "solitudedark";
   String extension = ".mp3";
-  //println ( pathwaysoundEffects+quitButtonSound+extension );
-  //println ( "Relative Pathway:", pathwayMusic+forestlullaby+extension );
-  String pathQuitButtonSound = sketchPath( pathwaysoundEffects + quitButtonSound + extension );//Absolute Pathway
-  String pathforestlullabySong = sketchPath( pathwayMyMusic + forestlullaby + extension );//Absolute Pathway
-  String pathcommasSong = sketchPath( pathwayMyMusic + commas + extension );//Absolute Pathway
-  String pathMASCSong = sketchPath( pathwayMyMusic + MASC + extension );//Absolute Pathway
-  String pathdrivebreakbeatSong = sketchPath( pathwayMyMusic + drivebreakbeat + extension );//Absolute Pathway
-  String pathTemsSong = sketchPath( pathwayMyMusic + Tems + extension );//Absolute Pathway
-  String pathsolitudedarkSong = sketchPath( pathwayMyMusic + solitudedark + extension );//Absolute Pathway
-  println ("Absolute Pathway:", pathsolitudedarkSong ); //pathQuitButtonSound
-  //println ( "Sound Effect Absolute Pathway:", pathQuitButtonSound );
-  //println ( "1. Absolute Pathway:", pathforestlullabySong );
-  //println ( "2. Absolute Pathway:", pathcommasSong );
-  //println ( "3. Absolute Pathway:", pathMASCSong );
-  //println ( "4. Absolute Pathway:", pathdrivebreakbeatSong );
-  //println ( "5. Absolute Pathway:", pathTemsSong );
-  //println ( "6. Absolute Pathway:", pathsolitudedarkSong );
-  soundEffects [0] = minim.loadFile( pathQuitButtonSound );
-  //Note: currentSong, currentSong+=1, currentSong++
-  println( "The current song is:", currentSong );
+  //println ( pathwaySoundEffects+quitButtonSound+extension );
+  //println ( "Relative Pathway:", pathwayMusic+duvet+extension );
+  String pathQuitButtonSound = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
   //
-  playList [0] =  minim.loadFile( pathforestlullabySong ); // "" is compiler error
-  println( "1. The current song is:", currentSong, pathforestlullabySong );
-  //playList[1] =  minim.loadFile( pathcommasSong ); // "" is compiler error
-  //println( "2. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathMASCSong ); // "" is compiler error
-  //println( "3. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathdrivebreakbeatSong ); // "" is compiler error
-  //println( "4. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathTemsSong ); // "" is compiler error
-  //println( "5. The current song is:", currentSong );
-  //playList[currentSong++] =  minim.loadFile( pathsolitudedarkSong ); // "" is compiler error
-  //println( "6. The current song is:", currentSong );
+  filePathNameMusic[currentSong+1] = pathwayMyMusic + duvet + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  //Equivalent Functions: ++ | +=1
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + commas + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + MASC + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + drive + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + forest + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + pink + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + pantheress + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + solitude + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + summer + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + Rihanna + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + Tems + extension;
+  //println( currentSong, filePathNameMusic[currentSong] );
+  //
+  filePathNameSoundEffect[0] = pathQuitButtonSound;
+  //println ( "Absolute Pathway:", filePathNameSoundEffect[0] ); //pathQuitButtonSound
+  //
+  soundEffects = minim.loadFile( filePathNameSoundEffect[0] );
   //
   //Random Start Prototype
-  //println( "Current Song, Random Number:", int ( random(0, 6) ) );
+  println( "Current Song, Random Number:", int ( random(0, 11) ) );
   //
   //Note: Music starts before CANVAS ... Purpose of Player
   //Note: See Easter Egg about Time-On and Looping Songs
-  playList[0].loop(); //Testing Only, change parameter to the accruate number
-  //
-  playListMetaData [0] = playList[0].getMetaData();
-  //
-  //playList.loop(0); //Testing Only
+  println(currentSong, filePathNameMusic[currentSong]);
+  playList =  minim.loadFile( filePathNameMusic[currentSong] ); // "" is compiler error
+  playList.loop(0); //Testing Only
   //
 } //End setup
 //
 void draw() {
-  //Instrpection of Booleans and Associated Varaiables
-   println( "Song Position", playList[currentSong].position(), "Song Length", playList[currentSong].length() );
-   if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()!=-1 ) println("There are", playList[currentSong].loopCount(), "loops left.");
-   if ( playList[currentSong].isLooping() && playList[currentSong].loopCount()==-1 ) println("Looping Infinitely");
-   //println("Keyboard Looping Question", looping);
-   if ( !playList[currentSong].isPlaying() ) println( "Nothing is playing, Pick a Song" );
-   if ( playList[currentSong].isPlaying() && !playList[currentSong].isLooping() ) println("Play Once");
-   //
-  /* Auto Play Code for Future Use
-   Contains instructions from Key Board Short Cuts
-   Note: PAIN Thresholds, 3 minutes & 75%, can be variables
-   Note: Variables can be set in a Menu Button
-   */
-   if ( playList.isPlaying() ) { //ERROR: ELSE Required, Stop & Pause broken, BOOLEAN is needed
-   if ( !playList.isLooping() && looping==true) looping=false; //Protect .loop() from .rewind() as STOP Loop
-   } else if ( looping == false && !playList.isPlaying() && playList[currentSong].length() < 60000 ) { //PAIN Minutes is 1 minute, 60, 60,000ms
-   //TRUE: if song is less than 1 minute, STOP, I want to hear it from the beginning
-   //.pause() in keyPressed() {} is actually STOP
-   playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
-   } else if ( looping == false && !playList[currentSong].isPlaying()  && ( playList[currentSong].position() > playList[currentSong].length()*0.75 ) ) { //Calc PAIN # as % of Song
-   //TRUE: if 75% played, we need a STOP & Rewind Button
-   //.pause() in keyPressed() {} is actually STOP
-   playList[currentSong].rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
-   } else {
-  /* Future coding
-   currentSong = currentSong + 1; //currentSong++; currentSong+=1
-   playList[currentSong].play();
-   */
-}
- Previous IF-Else
- if ( playList[currentSong].isPlaying() ) {
- //Empty IF, TRUE
- } else {
- playList[currentSong].rewind(); //CAUTION: !.isPlaying() & .rewind() = STOP
- }
- /*
- //Printing Text to Console | CANVAS
- fill(black); //Note: background for rect()
- rect(width*1/4, height*0, width*1/2, height*1/10); //Text DIV
- fill(white); //Ink
- textAlign (CENTER, CENTER); //Align X&Y, see Processing.org / Reference
- //Values: [LEFT | CENTER | RIGHT] & [TOP | CENTER | BOTTOM | BASELINE]
- int size = 25; //Change the number until it fits, largest font size
- textFont(generalFont, size); //CAUTION: SIZE is hardcoded, needs to be changed manually
- println("String Variable is:", testingOnly);
- text(testingOnly, width*1/4, height*0, width*1/2, height*1/10);
- fill(255); //Reset to white for rest of the program
- //
- */
-//} //End draw
+    //Random Start Prototype
+  //println( "Current Song, Random Number:", currentSong );
+  //
+  //AutoPlay
+  if ( playList.isPlaying() ) {
+    if ( !playList.isLooping() && looping==true) looping=false; //Protect .loop() from .rewind() as STOP Loop
+  } else if ( looping == false && !playList.isPlaying() && playList.length() < 600000 ) { //PAIN Minutes is 1 minutes, 60s, 60,000ms
+    //TRUE: if song is less than 3 minutes, STOP, I want to hear it from the beginning
+    //.pause() in keyPressed() {} is actually STOP
+    playList.rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
+  } else if ( looping == false && !playList.isPlaying()  && ( playList.position() > playList.length()*0.75 ) ) { //Calc PAIN # as % of Song
+    //TRUE: if 75% played, we need a STOP & Rewind Button
+    //.pause() in keyPressed() {} is actually STOP
+    playList.rewind(); //NOTE: !.isPlaying() & .rewind() = STOP
+  } else {
+    /* Future coding
+     currentSong = currentSong + 1; //currentSong++; currentSong+=1
+     playList[currentSong].play();
+     */
+  }
+  //
+} //End draw
 //
 void keyPressed() {
-  if ( key=='A' || key=='a') { //Randomly Pick another song in the Play List
+   if ( key=='A' || key=='a') { //Randomly Pick another song in the Play List
     currentSong = int ( random( numberMusicSongs-numberMusicSongs, numberMusicSongs ) );
     println( "Current Song, Random Number:", currentSong );
     playList.pause(); //Note: computer plays harddrive file,
@@ -157,131 +125,10 @@ void keyPressed() {
     playList.play();
   }
   //
-  if ( key=='P' || key=='p' ) { //Play Pause Button
-    //How much of the song should play before the Pause Button is actually a rewind button
-    if ( playList.isPlaying() ) {
-      playList.pause();
-    } else {
-      playList.play();
-    }
-  } //End Play Pause Button
-  if ( key=='L' || key=='l' ) { //Loop Once
-    playList.loop(1);
-    looping = true;
-  } //End Loop Once
-  if ( key=='I' || key=='i' ) { //Loop Infinite Times
-    playList.loop();
-    looping = true;
-  } //End Loop Infinite Times
-  if ( key=='S' || key=='s' ) { // STOP Button
-    playList.pause();
-    playList.rewind(); //Affects LOOP Times
-    looping = false;
-  } // End STOP Button
-  //
-  /* Note: NEXT:
-   - FF: first 10 seconds means NEXT
-   - FF: last 25% means NEXT
-   - FF means between above, it is a FF Button
-   - Note: between the above, NEXT Exists
-   
-   Preferences, might need to be in draw()
-   Local, might need to be Global
-   
-   Previous Code Statements
-   int skip = 5000; //Basic Preference
-   if ( key=='H' || key=='h' ) skip = 5000 ;
-   if ( key=='G' || key=='g' ) skip = 10000 ;
-   if ( key=='G' || key=='g' ) skip = playList.length()*0.25 ;
-   */
-  if ( key=='G' || key=='g' ) { //Two Preference Option
-    println ( "New Value of SKIP", skip, "Position:", playList.position(), "Crossed Last 75%", playList.position()>playList.length()*0.75, "\t\tLast 75% starts at:", playList.length()*0.75, "Song Ends at:", playList.length() ) ;
-    if ( skip == 5000 ) {
-      skip = int ( playList.length()*0.25 ); //tuncated to nearest millisecond
-    } else {
-      skip = 5000;
-    }
-    println ( "New Value of SKIP", skip, "Position:", playList.position(), "Crossed Last 75%", playList.position()>playList.length()*0.75, "\t\tLast 75% starts at:", playList.length()*0.75, "Song Ends at:", playList.length() ) ;
-  }
-}
-  /* Repeating Code
-   - NOTE: two repetitions of the same code exist
-   - If a change happens to one, both should be automatically changed
-   - Best Practice: Procedural Programming
-   */
-  if ( key=='F' || key=='f' ) {
-    /* NEXT Code
-     - Order of Nested IFs: <10 seconds, between 10s & 75%, >75%, then else allows for regular skip on any file when not playing
-     - Create a void next() to group this code if needing to use it other places
-     - NEXT Button
-     */
-    if ( playList.position()<10000 ) {
-      println( "Current Song # is:", currentSong );
-      playList.pause(); //Note: computer plays harddrive file,
-      playList.rewind(); //     mulitple files will play at the same time
-      //Try Catch solves arrayListOutOfBounds
-      if ( currentSong >= numberMusicSongs-1 ) { //Note: posssible error when !=, better code ... currentSong<0
-        currentSong = 0;
-      } else {
-        currentSong++;
-      }
-      println( "Current Song changed to:", currentSong );
-      playList =  minim.loadFile( filePathNameMusic[currentSong] );
-      playList.play();
-    }
-    //CAUTION: inequalities do not confuse computer
-    if ( playList.position()>=10000 && playList.position()<=playList.length()*0.75 ) playList.skip( skip ) ; //SKIP Forward 1 second (1000 milliseconds);
-    if ( playList.position()>playList.length()*0.75 ) {
-      /* NEXT
-       - Pauses current song, Rewinds current song, currentSong++, Play current song
-       - ERROR: arrayListOutOfBounds
-       - TBA
-       */
-      println("Else of If-Elseif-Else ( .isPlaying)" );
-      playList.pause(); //Note: computer plays harddrive file,
-      playList.rewind(); //     mulitple files will play at the same time
-      //Try Catch solves arrayListOutOfBounds
-      if ( currentSong >= numberMusicSongs-1 ) { //Note: posssible error when !=
-        currentSong = 0;
-      } else {
-        currentSong++;
-      }
-      println( "Current Song changed to:", currentSong );
-      playList =  minim.loadFile( filePathNameMusic[currentSong] );
-      playList.play();
-    }
-
-    println ( "New Value of SKIP", skip, "Position:", playList.position(), "Crossed Last 75%", playList.position()>playList.length()*0.75, "\t\tLast 75% starts at:", playList.length()*0.75, "Song Ends at:", playList.length() ) ;
-  }
-  if ( key=='R' || key=='r' ) {
-    /* Previous Code
-     - Order of Nested IFs: <10 seconds, between 10s & 75%, >75%, then else allows for regular skip on any file when not playing
-     - Create a void next() to group this code if needing to use it other places
-     */
-    playList.skip( -skip ) ; //SKIP Reverse 1 second (1000 milliseconds)
-    println ( "New Value of SKIP", skip, "Position:", playList.position(), "Crossed Last 75%", playList.position()>playList.length()*0.75, "\t\tLast 75% starts at:", playList.length()*0.75, "Song Ends at:", playList.length() ) ;
-  }
-  //
-  /* Note: Basic PREVIOUS Code
-   println( "Current Song # is:", currentSong );
-   playList.pause(); //Note: computer plays harddrive file,
-   playList.rewind(); //     mulitple files will play at the same time
-   //Try Catch solves arrayListOutOfBounds
-   if ( currentSong <= 0-1 ) { //Note: posssible error when !=, better code ... currentSong<0
-   currentSong = numberMusicSongs;
-   } else {
-   currentSong++;
-   }
-   println( "Current Song changed to:", currentSong );
-   playList =  minim.loadFile( filePathNameMusic[currentSong] );
-   playList.play();
-   }
-   */
-  //
 } //End keyPressed
 //
 void mousePressed() {
-} //End mousePressed
+} //End mousPressed
 //
 //End MAIN Program
 //
