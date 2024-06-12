@@ -38,6 +38,10 @@ void population() {
   LibraryY = appHeight*80/100;
   LibraryWidth =  appWidth*20/100;
   LibraryHeight = appHeight*15/100;
+  StarTunesCoverX = appWidth*18/100; //Percents Example
+  StarTunesCoverY = appHeight*15/100;
+  StarTunesCoverWidth = appWidth*64/100;
+  StarTunesCoverHeight = appHeight*6/16; //Fraction Example
 } //End Population
 //
 void drawRects() { //Layout DIVs

@@ -1,18 +1,8 @@
+/*
 //Global Variables
 PImage StarTunesCoverImage;
-//
-void ratio() {
-  //Display
-  size(600, 400); //width, height //400, 500
-  //fullScreen(); //displayWidth, displayHeight
-  appWidth = width; //displayWidth
-  appHeight = height; //displayHeight
   //
   //Population
-  StarTunesCoverX = appWidth*18/100; //Percents Example
-  StarTunesCoverY = appHeight*15/100;
-  StarTunesCoverWidth = appWidth*64/100;
-  StarTunesCoverHeight = appHeight*6/16; //Fraction Example
   //
   //Variable Population
   //NOTE: once image loaded by STRINGS, only image variable as Global Variable Required
@@ -22,7 +12,6 @@ void ratio() {
   String pathway = "../mystuff/Images/";
   String portrait = "Portrait/";
   String StarTunesImagePath = pathway + portrait + haumea + extensionJPG;
-  StarTunesImage = loadImage(StarTunesImagePath );
   //
   //Image Aspect Ratio Calculations
   //NOTE: IF-Else & WHILE to Adjust Aspect Ratio Dimensions
@@ -59,3 +48,4 @@ void keyPress() {
 } //End keyPressed
 //
 //End MAIN Program
+*/
