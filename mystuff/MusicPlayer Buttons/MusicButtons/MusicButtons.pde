@@ -64,7 +64,7 @@ void setup() {
   //println( currentSong, filePathNameMusic[currentSong] );
   filePathNameMusic[currentSong+=1] = pathwayMyMusic + forest + extension;
   //println( currentSong, filePathNameMusic[currentSong] );
-  filePathNameMusic[currentSong+=1] = pathwayMyMusic + Rihanna + extension;
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + pink + extension;
   //println( currentSong, filePathNameMusic[currentSong] );
   filePathNameMusic[currentSong+=1] = pathwayMyMusic + pantheress + extension;
   //println( currentSong, filePathNameMusic[currentSong] );
@@ -74,7 +74,7 @@ void setup() {
   //println( currentSong, filePathNameMusic[currentSong] );
   filePathNameMusic[currentSong+=1] = pathwayMyMusic + Tems + extension;
   //println( currentSong, filePathNameMusic[currentSong] );
-  filePathNameMusic[currentSong+=1] = pathwayMyMusic + pink + extension;
+  filePathNameMusic[currentSong+=1] = pathwayMyMusic + Rihanna + extension;
   //println( currentSong, filePathNameMusic[currentSong] );
   //
   filePathNameSoundEffect[0] = pathQuitButtonSound;
