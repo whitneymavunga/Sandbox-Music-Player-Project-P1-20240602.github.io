@@ -21,7 +21,7 @@ int appWidth, appHeight;
 //
 int size;
 PFont generalFont;
-String quit="QUIT";
+String quit="Quit";
 //
 color white=255, red=#FF0000, black=0, violet=#7F00FF; //Hexidecimal, see Tools / Colour Selector
 Boolean dayMode=false; //App starts in Night Mode, set to day in setup()
@@ -31,7 +31,7 @@ color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, not
 color foregroundColour;
 //
 String pathDarkBackgroundImage, pathLightBackgroundImage;
-PImage shinra,musiclogo,haumea, starslogo;
+PImage shinra,musiclogo,haumea, killua;
 PImage backgroundImage;
 PImage AlbumCoverImage;
 float AlbumCoverRIGHT, AlbumCoverCENTERED, AlbumCoverLEFT; //??? Local
@@ -69,16 +69,17 @@ void setup() {
   //Variable Population
   //Images
   String shinra = "fire-force-season-1-cour-2-1190407-1280x0-1-800x449";
+  String killua = "killua___spring_by_leork_dream_dh51k2n-fullview";
   String musiclogo = "0b94c75b97182946d495f34c16eab987";
-  String starslogo = "Stars-Logo-Graphics-1-3-580x386";
+  String extensionJPEG = ".jpeg";
   String extensionJPG = ".jpg";
   String pathway = "../mystuff/Images/";
   String landscape_Square = "Landscape & Square Images/";
   String portrait = "portrait/";
-  String backgroundFileName = "Background Image/";
-  pathLightBackgroundImage = pathway + backgroundFileName + shinra + extensionJPG;
+  String backgroundFileName = "BackgroundImage/";
+  pathLightBackgroundImage = pathway + backgroundFileName + shinra + extensionJPEG;
   pathDarkBackgroundImage = pathway + landscape_Square + musiclogo + extensionJPG;
-  String AlbumCoverImagePath = pathway + portrait + starslogo + extensionJPG;
+  String AlbumCoverImagePath = pathway + portrait + killua + extensionJPG;
   AlbumCoverImage = loadImage( AlbumCoverImagePath );
   //
   //Image Aspect Ratio Calculations
