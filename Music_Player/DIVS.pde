@@ -1,5 +1,5 @@
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
-float StarTunesCoverX, StarTunesCoverY, StarTunesCoverWidth, StarTunesCoverHeight;
+float AlbumCoverX, AlbumCoverY, AlbumCoverWidth, AlbumCoverHeight, AlbumCoverWidthAdjusted, AlbumCoverHeightAdjusted;;
 float playButtonX, playButtonY, playButtonWidth, playButtonHeight;
 float quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight;
 float RadioX, RadioY, RadioWidth, RadioHeight;
@@ -18,10 +18,10 @@ void population() {
   backgroundY = appHeight*0;
   backgroundWidth = appWidth-1;
   backgroundHeight = appHeight-1;
-  StarTunesCoverX = appWidth*18/100; //Percents example
-  StarTunesCoverY = appHeight*15/100;
-  StarTunesCoverWidth = appWidth*64/100;
-  StarTunesCoverHeight = appHeight*6/16; // Fraction Example
+  AlbumCoverX = appWidth*18/100; //Percents example
+  AlbumCoverY = appHeight*15/100;
+  AlbumCoverWidth = appWidth*64/100;
+  AlbumCoverHeight = appHeight*6/16; // Fraction Example
   playButtonX = appWidth*3.45/10;
   playButtonY = appHeight*7/10;
   playButtonWidth = appWidth*3/10;
@@ -38,10 +38,6 @@ void population() {
   LibraryY = appHeight*80/100;
   LibraryWidth =  appWidth*20/100;
   LibraryHeight = appHeight*15/100;
-  StarTunesCoverX = appWidth*18/100; //Percents Example
-  StarTunesCoverY = appHeight*15/100;
-  StarTunesCoverWidth = appWidth*64/100;
-  StarTunesCoverHeight = appHeight*6/16; //Fraction Example
 } //End Population
 //
 void drawRects() { //Layout DIVs
@@ -50,7 +46,7 @@ void drawRects() { //Layout DIVs
   int centerX = appWidth*1/2;
   int centerY = appHeight*1/2;
   //rect(centerX*1/2, centerY*1/2, appWidth*1/2, appHeight*1/2);
-  rect(StarTunesX, StarTunesY, StarTunesWidth, StarTunesHeight);
+  rect(AlbumCoverX, AlbumCoverY, AlbumCoverWidth, AlbumCoverHeight);
   rect(playButtonX, playButtonY, playButtonWidth, playButtonHeight);
   rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
   //rect(RadioX, RadioY, RadioWidth, RadioHeight);
