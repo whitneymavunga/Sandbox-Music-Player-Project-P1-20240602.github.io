@@ -31,7 +31,7 @@ color backgroundColour, darkBackground=0, whiteBackground=255; //Gray Scale, not
 color foregroundColour;
 //
 String pathDarkBackgroundImage, pathLightBackgroundImage;
-PImage shinra,musiclogo,haumea, playpause;
+PImage shinra,musiclogo,haumea, starslogo;
 PImage backgroundImage;
 PImage AlbumCoverImage;
 float AlbumCoverRIGHT, AlbumCoverCENTERED, AlbumCoverLEFT; //??? Local
@@ -47,8 +47,8 @@ void setup() {
   println(displayInstructions);
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  String pathwaySoundEffects = "../audio/soundEffects/"; //Relative Path
-  String quitButtonSound = "CarDoorClosing";
+  String pathwaySoundEffects = "../mystuff/audio/soundEffects/"; //Relative Path
+  String quitButtonSound = "Suspense";
   String extension = ".mp3";
   //println ( pathwaySoundEffects+quitButtonSound+extension );
   String path = sketchPath( pathwaySoundEffects + quitButtonSound + extension ); //Absolute Path
@@ -60,7 +60,7 @@ void setup() {
   //String[] fontList = PFont.list(); //To list all fonts available on OS
   //printArray(fontList); //For listing all possible fonts to choose from, then createFont
   size = ( appWidth > appHeight ) ? appHeight : appWidth ; // Font size starts with smaller dimension
-  generalFont = createFont("Georgia-Bold", size);
+  generalFont = createFont("Georgia", size);
   //bottomFont = createFont("", size); //Note: more than one font allowed
   // Tools / Create Font / Find Font / Use size field / Do not press "OK", known bug
   //
@@ -70,7 +70,7 @@ void setup() {
   //Images
   String shinra = "fire-force-season-1-cour-2-1190407-1280x0-1-800x449";
   String musiclogo = "0b94c75b97182946d495f34c16eab987";
-  String playpause = "ec5a7b519a412b3868c68ed7ae9a595af0361dcaa7a2d2d0b0169f4f87fa3046";
+  String starslogo = "Stars-Logo-Graphics-1-3-580x386";
   String extensionJPG = ".jpg";
   String pathway = "../mystuff/Images/";
   String landscape_Square = "Landscape & Square Images/";
@@ -78,7 +78,7 @@ void setup() {
   String backgroundFileName = "Background Image/";
   pathLightBackgroundImage = pathway + backgroundFileName + shinra + extensionJPG;
   pathDarkBackgroundImage = pathway + landscape_Square + musiclogo + extensionJPG;
-  String AlbumCoverImagePath = pathway + portrait + playpause + extensionJPG;
+  String AlbumCoverImagePath = pathway + portrait + starslogo + extensionJPG;
   AlbumCoverImage = loadImage( AlbumCoverImagePath );
   //
   //Image Aspect Ratio Calculations
